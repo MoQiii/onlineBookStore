@@ -1,4 +1,4 @@
-package com.syj.olb.book.web;
+﻿package com.syj.olb.book.web;
 
 import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.pojo.BookQuery;
@@ -23,7 +23,7 @@ public class BookController {
     /**
      * 获取当前页码
      * @param req
-     * @return
+     * @return11111111倒萨倒萨多
      */
     private int getPc(HttpServletRequest req) {
         int pc = 1;
