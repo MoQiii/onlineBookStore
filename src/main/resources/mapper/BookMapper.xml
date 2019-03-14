@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syj.olb.book.pojo.BookMapper">
+   <resultMap id="book" type="com.syj.olb.book.pojo.Book">
+       <id property="bid" column="bid" />
+       <result property="bname" column="bname"/>
+       <result property="author" column="author"/>
+       <result property="price" column="price"/>
+       <result property="currPrice" column="currPrice"/>
+       <result property="discount" column="discount"/>
+       <result property="press" column="press"/>
+       <result property="publishtime" column="publishtime"/>
+       <result property="edition" column="edition"/>
+       <result property="pageNum" column="pageNum"/>
+       <result property="wordNum" column="wordNum"/>
+       <result property="printtime" column="printtime"/>
+       <result property="booksize" column="booksize"/>
+       <result property="paper" column="paper"/>
+       <result property="image_w" column="image_w"/>
+       <result property="image_b" column="image_b"/>
+       <result property="cid" column="cid"/>
+       <result property="orderBy" column="orderBy"/>
+      <!-- <association property="category" javaType="Category">
+           <id property="cid" column="cid"/>
+           <result property="cname" column="cname"/>
+           <result property="parent" column="pid"/>
+           <result property="desc" column="desc"/>
+           <result property="orderBy" column="orderBy"/>
+       </association>-->
+    </resultMap>
+    <!--<select id="findByCriteria" parameterType="com.syj.olb.book.pojo.BookQuery" resultMap="book">
+        select * from  t_book where cid=#{cid}
+    </select>
+    <select id="count" parameterType="com.syj.olb.book.pojo.BookQuery" resultType="int">
+        select count(*) from  t_book where cid=#{cid}
+    </select>-->
+    <select id="findByCriteria" parameterType="bookQuery" resultMap="book">
+        select * from  t_book where cid=#{cid}
+    </select>
+    <select id="count" parameterType="bookQuery" resultType="int">
+        select count(*) from  t_book where cid=#{cid}
+    </select>
+    
+    <select id="findByBids" parameterType="list" resultMap="book">
+        select * from t_book
+        <where>
+            <choose>
+                <when test="list.size()>0 and list!=null">
+                    <foreach collection='list' open=' bid in (' item='id' separator=',' close=')'>
+                        #{id}
+                    </foreach>
+                </when>
+                <otherwise>
+                    1=0
+                </otherwise>
+            </choose>
+
+        </where>
+
+    </select>
+</mapper>

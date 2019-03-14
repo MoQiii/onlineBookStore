@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syj.olb.cart.domain.CartItemMapper">
+
+    <resultMap id="cartItem" type="CartItem">
+        <id property="cartItemId" column="cartItemId" />
+        <result property="quantity" column="quantity"/>
+        <result property="orderBy" column="orderBy"/>
+        <!--<result property="uid" column="uid"/>
+        <result property="bid" column="bid"/>-->
+        <association property="book" column="bid" select="getBook" javaType="book"/>
+        <association property="user" column="uid" select="getUser" javaType="MyUser"/>
+    </resultMap>
+   <delete id="batchDelete">
+       delete from t_cartitem
+       <if test="list.size()!=0">
+           <where>
+               <foreach collection="list" open=" cartItemId in(" close=")" item="id" separator=",">
+                   #{id}
+               </foreach>
+           </where>
+       </if>
+       <if test="list.size()==0">
+           where 1=0
+       </if>
+
+   </delete>
+
+    <select id="findById" resultMap="cartItem" >
+        select * from t_cartitem where cartItemId=#{id}
+    </select>
+    <select id="getBook" resultType="book" >
+        select * from t_book where bid=#{id}
+    </select>
+    <select id="getUser" resultType="MyUser" >
+        select * from t_user where uid=#{id}
+    </select>
+</mapper>
