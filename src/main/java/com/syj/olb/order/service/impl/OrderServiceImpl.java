@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderServcie {
      */
     @Override
     public int findStatus(String oid) {
-        return 0;
+        return orderDao.findStatus(oid);
     }
 
     /**
@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderServcie {
      */
     @Override
     public Order load(String oid) {
-        return null;
+        return orderDao.load(oid);
     }
 
     /**
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderServcie {
      */
     @Override
     public void createOrder(Order order) {
-
+        orderDao.add(order);
     }
 
     /**

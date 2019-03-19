@@ -15,7 +15,7 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/css/order/ordersucc.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/css/order/ordersucc.css'/>">
   </head>
   
   <body>

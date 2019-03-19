@@ -6,6 +6,7 @@ import com.syj.olb.book.pojo.PageConstants;
 import com.syj.olb.order.dao.OrderDao;
 import com.syj.olb.order.pojo.Order;
 import com.syj.olb.order.pojo.OrderItem;
+import com.syj.olb.order.pojo.OrderItemMapper;
 import com.syj.olb.order.pojo.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class OrderDaoImpl implements OrderDao {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private OrderItemMapper orderItemMapper;
     /**
      * 查询订单状态
      *
@@ -26,7 +29,8 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public int findStatus(String oid) {
-        return 0;
+
+        return orderMapper.findStatus(oid);
     }
 
     /**
@@ -48,7 +52,8 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public Order load(String oid) {
-        return null;
+
+        return orderMapper.load(oid);
     }
 
     /**
@@ -58,7 +63,8 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public void add(Order order) {
-
+        orderMapper.add(order);
+        orderItemMapper.batchInsert(order.getOrderItemList());
     }
 
     /**

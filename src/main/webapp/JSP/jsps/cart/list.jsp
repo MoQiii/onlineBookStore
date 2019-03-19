@@ -91,7 +91,7 @@ $(function() {
 		if(quantity == 1) {
 			if(confirm("您是否真要删除该条目？")) {
                 $.ajax({
-                    url:"http://localhost:8080/Cart/batchDelete?cartItemIds",
+                    url:"http://localhost:8080/Cart/batchDelete",
 					data:{cartItemIds:id},
 					type: "post",
 					success:function () {
@@ -294,7 +294,7 @@ function sleep(n) { //n表示的毫秒数
 			<a class="jian" id="${cartItem.cartItemId }Jian"></a><input class="quantity" readonly="readonly" id="${cartItem.cartItemId }Quantity" type="text" value="${cartItem.quantity }"/><a class="jia" id="${cartItem.cartItemId }Jia"></a>
 		</td>
 		<td width="100px">
-			<span class="price_n">&yen;<span class="subTotal" id="${cartItem.cartItemId }Subtotal">${cartItem.subtotal }</span></span>
+			<span class="price_n">&yen;<span class="subTotal" id="${cartItem.cartItemId }Subtotal">${cartItem.subTotal }</span></span>
 		</td>
 		<td>
 			<a href="<c:url value='/Cart/batchDelete?cartItemIds=${cartItem.cartItemId }'/>">删除</a>

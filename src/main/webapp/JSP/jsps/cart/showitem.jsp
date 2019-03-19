@@ -27,7 +27,7 @@
 	//计算合计
 	$(function() {
 		var total = 0;
-		$(".subtotal").each(function() {
+		$(".subTotal").each(function() {
 			total += Number($(this).text());
 		});
 		$("#total").text(round(total, 2));
@@ -66,7 +66,7 @@
 		<td>&yen;${cartItem.book.currPrice }</td>
 		<td>${cartItem.quantity }</td>
 		<td>
-			<span class="price_n">&yen;<span class="subtotal">${cartItem.subtotal }</span></span>
+			<span class="price_n">&yen;<span class="subTotal">${cartItem.subTotal }</span></span>
 		</td>
 	</tr>
 </c:forEach>

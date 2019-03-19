@@ -16,7 +16,7 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/css/order/desc.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/css/order/desc.css'/>">
   </head>
   
 <body>
@@ -55,18 +55,18 @@
 						<tr style="padding-top: 20px; padding-bottom: 20px;">
 							<td class="td" width="400px">
 								<div class="bookname">
-								  <img align="middle" width="70" src="<c:url value='/${item.book.image_b }'/>"/>
-								  <a href="<c:url value='/BookServlet?method=load&bid=${item.book.bid }'/>">${item.book.bname }</a>
+								  <img align="middle" width="70" src="<c:url value='/${item.image_b }'/>"/>
+								  <a href="<c:url value='/book/load?bid=${item.book.bid }'/>">${item.book.bname }</a>
 								</div>
 							</td>
 							<td class="td" >
-								<span>&yen;${item.book.currPrice }</span>
+								<span>&yen;${item.currPrice }</span>
 							</td>
 							<td class="td">
 								<span>${item.quantity }</span>
 							</td>
 							<td class="td">
-								<span>&yen;${item.subtotal }</span>
+								<span>&yen;${item.subTotal }</span>
 							</td>			
 						</tr>
 </c:forEach>
@@ -80,13 +80,13 @@
 			<span style="font-weight: 900; font-size: 15px;">合计金额：</span>
 			<span class="price_t">&yen;${order.total }</span><br/>
 <c:if test="${order.status eq 1 }">
-	<a href="<c:url value='/OrderServlet?method=paymentPre&oid=${order.oid }'/>" class="pay"></a><br/>
+	<a href="<c:url value='/order/paymentPre?oid=${order.oid }'/>" class="pay"></a><br/>
 </c:if>
 <c:if test="${order.status eq 1 and btn eq 'cancel'}">
-    <a id="cancel" href="<c:url value='/OrderServlet?method=cancel&oid=${order.oid }'/>">取消订单</a><br/>
+    <a id="cancel" href="<c:url value='/order/cancel?oid=${order.oid }'/>">取消订单</a><br/>
 </c:if>
 <c:if test="${order.status eq 3 and btn eq 'confirm'}">
-	<a id="confirm" href="<c:url value='/OrderServlet?method=confirm&oid=${order.oid }'/>">确认收货</a><br/>
+	<a id="confirm" href="<c:url value='/order/confirm?oid=${order.oid }'/>">确认收货</a><br/>
 </c:if>	
 		</div>
 	</div>

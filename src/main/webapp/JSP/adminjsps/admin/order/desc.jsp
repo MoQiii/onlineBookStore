@@ -69,7 +69,7 @@
 								<span>${orderItem.quantity }</span>
 							</td>
 							<td class="td">
-								<span>&yen;${orderItem.subtotal }</span>
+								<span>&yen;${orderItem.subTotal }</span>
 							</td>			
 						</tr>
 </c:forEach>
