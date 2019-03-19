@@ -36,6 +36,8 @@ a {text-decoration: none;}
                   language:  'zh-CN',
                   keyboardNavigation:true
               });
+              $("#add").click();
+              $("#add").hide();
           });
           var path="http://localhost:8080";
           function addOldBook() {
@@ -57,7 +59,7 @@ a {text-decoration: none;}
   </head>
   
   <body>
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  <button type="button" id="add" style="" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       出售旧书
   </button>
   </span>
@@ -89,8 +91,8 @@ a {text-decoration: none;}
                                   </select>
                               </div>
                         </div>
-                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原价 : </span><input id="price" name="price" value=""></div>
-                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现价 : </span><input id="originalPrice" name="originalPrice" value=""></div>
+                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原价 : </span><input id="originalPrice" name="originalPrice" value=""></div>
+                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现价 : </span><input id="currPrice" name="currPrice" value=""></div>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者 : </span><input id="author" name="author" value=""></div>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;出版社 : </span><input id="press" name="press" value=""></div>
                       <div style="margin-bottom: 8px"><span>出版年份 : </span><input size="16" type="text" id="publishtime" name="publishtime"  value="" style="width: 172px" readonly class="form_datetime"></div>

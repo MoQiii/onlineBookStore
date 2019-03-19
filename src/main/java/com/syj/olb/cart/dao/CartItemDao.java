@@ -38,7 +38,7 @@ public interface CartItemDao {
      * @param cartItemId
      * @param quantity
      */
-    public void updateQuantity(String cartItemId, int quantity);
+    public void updateQuantity(CartItem cartItem);
     /**
      * 添加条目
      * @param cartItem

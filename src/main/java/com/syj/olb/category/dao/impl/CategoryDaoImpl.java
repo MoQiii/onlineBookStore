@@ -42,4 +42,64 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category findCategoryByCname(String Cname) {
         return categoryMapper.findCategoryByCname(Cname);
     }
+
+    @Override
+    public void add(Category category) {
+        categoryMapper.add(category);
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param cid
+     */
+    @Override
+    public void delete(String cid) {
+        categoryMapper.delete(cid);
+    }
+
+    /**
+     * 修改分类
+     * 即可修改一级分类，也可修改二级分类
+     *
+     * @param category
+     */
+    @Override
+    public void edit(Category category) {
+        categoryMapper.edit(category);
+    }
+
+    /**
+     * 查询指定父分类下子分类的个数
+     *
+     * @param pid
+     * @return
+     */
+    @Override
+    public int findChildrenCountByParent(String pid) {
+        return  categoryMapper.findChildrenCountByParent(pid);
+    }
+
+    /**
+     * 加载分类
+     * 即可加载一级分类，也可加载二级分类
+     *
+     * @param cid
+     * @return
+     */
+    @Override
+    public Category load(String cid) {
+
+        return categoryMapper.load(cid);
+    }
+
+    /**
+     * 获取所有父分类，但不带子分类的！
+     *
+     * @return
+     */
+    @Override
+    public List<Category> findParents() {
+        return categoryMapper.findParents();
+    }
 }

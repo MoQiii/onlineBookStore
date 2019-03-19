@@ -32,7 +32,7 @@
 	    <ul>
 	    	<li>商品编号：${book.bid }</li>
 	    	<li>会员价：<span class="price_n">&yen;${book.currPrice }</span></li>
-	    	<li>定价：<span class="spanPrice">&yen;${book.price }</span>　折扣：<span style="color: #c30;">${book.discount }</span>折</li>
+	    	<li>原价：<span class="spanPrice">&yen;${book.originalPrice }</span></li>
 	    </ul>
 		<hr class="hr1"/>
 		<table>
@@ -49,7 +49,7 @@
 			<tr>
 				<td colspan="3">出版时间：${book.publishtime }</td>
 			</tr>
-			<tr>
+			<%--<tr>
 				<td>版次：${book.edition }</td>
 				<td>页数：${book.pageNum }</td>
 				<td>字数：${book.wordNum }</td>
@@ -58,17 +58,17 @@
 				<td width="180">印刷时间：${book.printtime }</td>
 				<td>开本：${book.booksize }开</td>
 				<td>纸张：${book.paper }</td>
-			</tr>
+			</tr>--%>
 		</table>
-		<div class="divForm">
-			<form id="form1" action="<c:url value='/Cart/add'/>" method="post">
-				<input type="hidden" name="method" value="add"/>
-				<input type="hidden" name="bid" value="${book.bid }"/>
-  				我要买：<input id="cnt" style="width: 40px;text-align: center;" type="text" name="quantity" value="1"/>件
-  			</form>
-  			<a id="btn" href="javascript:$('#form1').submit();">加入购物车</a>
-  		</div>
-	</div>
+			<div class="divForm">
+				<form id="form1" action="<c:url value='/Cart/add'/>" method="post">
+					<input type="hidden" name="method" value="add"/>
+					<input type="hidden" name="bid" value="${book.bid }"/>
+					我要买：<input id="cnt" style="width: 40px;text-align: center;" type="text" name="quantity" value="1"/>件
+				</form>
+				<a id="btn" href="javascript:$('#form1').submit();"></a>
+			</div>
+		  </div>
   </div>
   </body>
 </html>

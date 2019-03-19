@@ -7,6 +7,7 @@ import com.syj.olb.comon.CommonUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service("cartItemServiceImpl")
@@ -16,19 +17,16 @@ public class CartItemServiceImpl implements CartItemService {
     private CartItemDao cartItemDao;
     @Override
     public List<CartItem> loadCartItems(String cartItemIds) {
-        return null;
+        return cartItemDao.loadCartItems(cartItemIds);
     }
 
     /**
      * 修改购物车条目数量
-     *
-     * @param cartItemId
-     * @param quantity
      * @return
      */
     @Override
-    public void updateQuantity(String cartItemId, int quantity) {
-        cartItemDao.updateQuantity(cartItemId,quantity);
+    public void updateQuantity(CartItem cartItem) {
+        cartItemDao.updateQuantity(cartItem);
     }
 
     /**
@@ -52,16 +50,17 @@ public class CartItemServiceImpl implements CartItemService {
          * 1. 使用uid和bid去数据库中查询这个条目是否存在
          */
         CartItem _cartItem = cartItemDao.findByUidAndBid(
-                cartItem.getUser().getUid(),
-                cartItem.getBook().getBid());
+                cartItem.getUid(),cartItem.getBid());
         if(_cartItem == null) {//如果原来没有这个条目，那么添加条目
             cartItem.setCartItemId(CommonUtils.uuid());
             cartItemDao.addCartItem(cartItem);
-        } else {//如果原来有这个条目，修改数量
+        }
+        else {//如果原来有这个条目，修改数量
             // 使用原有数量和新条目数量之各，来做为新的数量
             int quantity = cartItem.getQuantity() + _cartItem.getQuantity();
+            cartItem.setSubTotal(new BigDecimal(quantity*cartItem.getPrice().intValue()));
             // 修改这个老条目的数量
-            cartItemDao.updateQuantity(_cartItem.getCartItemId(), quantity);
+            cartItemDao.updateQuantity(cartItem);
         }
     }
 

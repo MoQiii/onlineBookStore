@@ -20,4 +20,6 @@ public interface BookMapper {
     public int countByBname( @Param("bname") String bname);
     @Select("select * from t_book  where bname like #{bname}  order by orderBy limit #{c},#{ps}")
     public List<Book> findByBname( @Param("bname") String banme, @Param("c")int c, @Param("ps")int ps);
+    @Select("select count(*) from t_book where cid=#{cid}")
+    public int findBookCountByCategory(@Param("cid") String cid);
 }

@@ -14,14 +14,14 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="<c:url value='/jquery/jquery-1.5.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 	<script type="text/javascript">
 		function checkForm() {
 			if(!$("#cname").val()) {
 				alert("分类名不能为空！");
 				return false;
 			}
-			if(!$("#desc").val()) {
+			if(!$("#description").val()) {
 				alert("分类描述不能为空！");
 				return false;
 			}
@@ -37,10 +37,9 @@
     <h3>添加1级分类</h3>
     <h1></h1>
     <p style="font-weight: 900; color: red">${msg }</p>
-    <form action="<c:url value='/admin/AdminCategoryServlet'/>" method="post" onsubmit="return checkForm()">
-    	<input type="hidden" name="method" value="addParent"/>
+    <form action="<c:url value='/AdminCategory/addParent'/>" method="post" onsubmit="return checkForm()">
     	分类名称：<input type="text" name="cname" id="cname"/><br/>
-    	分类描述：<textarea rows="5" cols="50" name="desc" id="desc"></textarea><br/>
+    	分类描述：<textarea rows="5" cols="50" name="description" id="description"></textarea><br/>
     	<input type="submit" value="添加一级分类"/>
     	<input type="button" value="返回" onclick="history.go(-1)"/>
     </form>

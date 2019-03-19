@@ -1,4 +1,4 @@
-﻿package com.syj.olb.book.web;
+package com.syj.olb.book.web;
 
 import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.pojo.BookQuery;
@@ -23,7 +23,7 @@ public class BookController {
     /**
      * 获取当前页码
      * @param req
-     * @return11111111倒萨倒萨多
+     * @return
      */
     private int getPc(HttpServletRequest req) {
         int pc = 1;
@@ -235,7 +235,7 @@ public class BookController {
         /*
          * 3. 获取查询条件，本方法就是cid，即分类的id
          */
-    //    Book criteria = CommonUtils.toBean(req.getParameterMap(), Book.class);
+        //    Book criteria = CommonUtils.toBean(req.getParameterMap(), Book.class);
         /*
          * 4. 使用pc和cid调用service#findByCategory得到PageBean
          */

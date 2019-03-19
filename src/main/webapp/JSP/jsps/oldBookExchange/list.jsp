@@ -20,6 +20,7 @@
     <%--<script type="text/javascript" src="<c:url value='/JSP/jsps/pager/pager.js'/>"></script>--%>
 	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/JSP/jsps/js/book/list.js'/>"></script>
+	  <script type="text/javascript" src="<c:url value='/JSP/jsps/js/oldbook/oldbook.js'/>"></script>
   </head>
   
   <body>
@@ -30,8 +31,9 @@
   <div class="inner">
     <a class="pic" href="<c:url value='/OldBook/load?bid=${book.bid }'/>"><img src="<c:url value='http://localhost:8082/pic${book.image_b }'/>" border="0"/></a>
     <p class="price">
-		<span class="price_n">&yen;${book.price }</span>
+		<span class="price_n">&yen;${book.currPrice}</span>
 		<span class="price_r">&yen;${book.originalPrice }</span>
+		<span>&nbsp&nbsp&nbsp&nbsp<input type="button" value="下架" onclick="deleteOldBook('${book.bid}')"/></span>
 		<%--(<span class="price_s">${book.discount }折</span>)--%>
 	</p>
 	<p><a id="bookname" title="${book.bname }" href="<c:url value='/OldBook/load?bid=${book.bid }'/>">${book.bname }</a></p>
@@ -42,11 +44,12 @@
 	<c:url value="/OldBook/load" var="pressUrl">
 		<c:param name="press" value="${book.press }"/>
 	</c:url>
-	<p><a href="${authorUrl }" name='P_zz' title='${book.author }'>${book.author }</a></p>
+	<p>作者：${book.author }</p>
 	<p class="publishing">
-		<span>出 版 社：</span><a href="${pressUrl }">${book.press }</a>
+		<span>出 版 社：${book.press }</span>
 	</p>
 	<p class="publishing_time"><span>出版时间：</span>${book.publishtime }</p>
+	  <p></p>
   </div>
   </li>
 </c:forEach>

@@ -90,10 +90,18 @@ $(function() {
 		// 判断当前数量是否为1，如果为1,那就不是修改数量了，而是要删除了。
 		if(quantity == 1) {
 			if(confirm("您是否真要删除该条目？")) {
-				location = "http://localhost:8080/Cart/updateQuantity?cartItemIds=" + id;
+                $.ajax({
+                    url:"http://localhost:8080/Cart/batchDelete?cartItemIds",
+					data:{cartItemIds:id},
+					type: "post",
+					success:function () {
+                        window.location.href="http://localhost:8080/Cart/myCart";
+                    }
+                });
 			}
 		} else {
-			sendUpdateQuantity(id, quantity-1);
+            var price=$("#currPrice").text();
+			sendUpdateQuantity(id, quantity-1,price);
 		}
 	});
 	
@@ -103,17 +111,18 @@ $(function() {
 		var id = $(this).attr("id").substring(0, 32);
 		// 获取输入框中的数量
 		var quantity = $("#" + id + "Quantity").val();
-		sendUpdateQuantity(id, Number(quantity)+1);
+		var price=$("#currPrice").text();
+		sendUpdateQuantity(id, Number(quantity)+1,price);
 	});
 });
 
 // 请求服务器，修改数量。
-function sendUpdateQuantity(id, quantity) {
+function sendUpdateQuantity(id, quantity,price) {
 	$.ajax({
 		async:false,
 		cache:false,
 		url:"http://localhost:8080/Cart/updateQuantity",
-		data:{cartItemId:id,quantity:quantity},
+		data:{cartItemId:id,quantity:quantity,price:price},
 		type:"POST",
 		dataType:"json",
 		success:function(result) {
@@ -280,7 +289,7 @@ function sleep(n) { //n表示的毫秒数
 		<td align="left" width="400px">
 		    <a href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><span>${cartItem.book.bname }</span></a>
 		</td>
-		<td><span>&yen;<span class="currPrice">${cartItem.book.currPrice }</span></span></td>
+		<td><span>&yen;<span id="currPrice" class="currPrice">${cartItem.book.currPrice }</span></span></td>
 		<td>
 			<a class="jian" id="${cartItem.cartItemId }Jian"></a><input class="quantity" readonly="readonly" id="${cartItem.cartItemId }Quantity" type="text" value="${cartItem.quantity }"/><a class="jia" id="${cartItem.cartItemId }Jia"></a>
 		</td>
@@ -292,25 +301,6 @@ function sleep(n) { //n表示的毫秒数
 		</td>
 	</tr>
 </c:forEach>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	<tr>
 		<td colspan="4" class="tdBatchDelete">
 			<a href="javascript:batchDelete();">批量删除</a>
@@ -325,10 +315,10 @@ function sleep(n) { //n表示的毫秒数
 		</td>
 	</tr>
 </table>
-	<form id="jieSuanForm" action="<c:url value='/CartItemServlet'/>" method="post">
+	<form id="jieSuanForm" action="<c:url value='/Cart/loadCartItems'/>" method="post">
 		<input type="hidden" name="cartItemIds" id="cartItemIds"/>
 		<input type="hidden" name="total" id="hiddenTotal"/>
-		<input type="hidden" name="method" value="loadCartItems"/>
+		<%--<input type="hidden" name="method" value="loadCartItems"/>--%>
 	</form>
 
 	</c:otherwise>

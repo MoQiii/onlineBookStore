@@ -6,6 +6,8 @@ import com.syj.olb.cart.domain.CartItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +28,10 @@ public class CartItemDaoImpl implements CartItemDao {
      */
     @Override
     public List<CartItem> loadCartItems(String cartItemIds) {
-        return null;
+        String[] split = cartItemIds.split(",");
+        List<String> ids = Arrays.asList(split);
+
+        return cartItemMapper.loadCartItems(ids);
     }
 
     /**
@@ -69,8 +74,8 @@ public class CartItemDaoImpl implements CartItemDao {
      * @param quantity
      */
     @Override
-    public void updateQuantity(String cartItemId, int quantity) {
-        cartItemMapper.updateQuantity(cartItemId,quantity);
+    public void updateQuantity(CartItem cartItem) {
+        cartItemMapper.updateQuantity(cartItem);
     }
 
     /**

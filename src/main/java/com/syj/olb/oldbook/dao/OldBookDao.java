@@ -5,10 +5,12 @@ import com.syj.olb.book.pojo.BookQuery;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.oldbook.pojo.OldBook;
 import com.syj.olb.oldbook.pojo.OldBookQuery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface OldBookDao {
+    public List<OldBook> oldBookList( String uid);
     /**
      * 删除图书
      * @param bid

@@ -42,9 +42,12 @@
 	<c:url value="/book/load" var="pressUrl">
 		<c:param name="press" value="${book.press }"/>
 	</c:url>
-	<p><a href="${authorUrl }" name='P_zz' title='${book.author }'>${book.author }</a></p>
+	<p><%--<a href="${authorUrl }" name='P_zz' title='${book.author }'>${book.author }</a>--%>
+	作者：${book.author }
+	</p>
 	<p class="publishing">
-		<span>出 版 社：</span><a href="${pressUrl }">${book.press }</a>
+		<%--<span>出 版 社：</span><a href="${pressUrl }">${book.press }</a>--%>
+			<span>出 版 社：>${book.press }</span>
 	</p>
 	<p class="publishing_time"><span>出版时间：</span>${book.publishtime }</p>
   </div>

@@ -9,6 +9,8 @@ import com.syj.olb.oldbook.pojo.OldBookQuery;
 import java.util.List;
 
 public interface OldBookService {
+    public List<OldBook> oldBookList( String uid);
+
     /**
      * 删除图书
      * @param bid

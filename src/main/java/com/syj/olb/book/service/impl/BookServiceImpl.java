@@ -43,7 +43,8 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public int findBookCountByCategory(String cid) {
-        return 0;
+
+        return bookDao.findBookCountByCategory(cid);
     }
 
     /**

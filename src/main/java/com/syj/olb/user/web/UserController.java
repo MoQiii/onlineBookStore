@@ -27,6 +27,16 @@ public class UserController {
     @Autowired
     @Qualifier("userServiceImpl")
     public UserService userService;
+
+    @RequestMapping("/adminLoginView")
+    public String adminLoginView(){
+        return "/adminjsps/login";
+    }
+    @RequestMapping("/adminLgoin")
+    public String adminLogin(){
+
+        return "/adminjsps/login";
+    }
     @RequestMapping("/ajaxValidateLoginname")
     public String ajaxValidateLoginname(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

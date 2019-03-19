@@ -15,7 +15,12 @@ public interface CartItemMapper {
      * @param cartItemIds
      * @return
      */
-    public List<CartItem> loadCartItems(String cartItemIds);
+    @Select("<script>select * from t_cartitem c, t_book b where c.bid=b.bid and " +
+            "<foreach item='item' index='index' collection='cartItemIds' open='cartItemId in(' separator=',' close=')'> " +
+            "#{item} " +
+            "</foreach>" +
+            "</script>")
+    public List<CartItem> loadCartItems(@Param("cartItemIds") List<String> cartItemIds);
     /**
      * 按id查询
      * @param cartItemId
@@ -35,16 +40,15 @@ public interface CartItemMapper {
 
     /**
      * 修改指定条目的数量
-     * @param cartItemId
-     * @param quantity
      */
-    @Update("update t_cartitem set quantity=#{quantity} where cartItemId=#{cartItemId}")
-    public void updateQuantity(@Param("cartItemId") String cartItemId, @Param("quantity") int quantity);
+    @Update("update t_cartitem set quantity=#{cartItem.quantity},subtotal=#{cartItem.subTotal} where cartItemId=#{cartItem.cartItemId}")
+    public void updateQuantity(@Param("cartItem") CartItem cartItem);
     /**
      * 添加条目
      * @param cartItem
      */
-    @Insert("insert into t_cartitem(cartItemId, quantity, bid, uid) values(#{cartItem.cartItemId},#{cartItem.quantity},#{cartItem.book.bid},#{cartItem.user.uid})")
+    @Insert("insert into t_cartitem(cartItemId, quantity, bid, uid,subtotal,price) values(#{cartItem.cartItemId},#{cartItem.quantity}," +
+            "#{cartItem.bid},#{cartItem.uid},#{cartItem.subTotal},#{cartItem.price})")
     public void addCartItem(@Param("cartItem") CartItem cartItem);
 
     /*

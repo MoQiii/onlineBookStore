@@ -13,9 +13,11 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,17 +29,19 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @RequestMapping("/OldBook")
 @Controller
-@ConfigurationProperties(prefix = "attment")
+//@ConfigurationProperties(prefix = "attachment")
 @PropertySource("config/attachments.properties")
 public class OldBookController {
 
     @Resource(name="oldBookServiceImpl")
     private OldBookService bookService;
-    @Value("${attment.filePath}")
+    @Value("${attachment.filePath}")
     private String path;
     @Resource(name="categoryServiceImpl")
     private CategoryService categoryService;
@@ -52,6 +56,28 @@ public class OldBookController {
     public String addView(HttpServletRequest req, HttpServletResponse res, OldBook oldBook){
 
         return "jsps/oldBookExchange/addOldBook";
+    }
+    @RequestMapping(value="/delete",method = RequestMethod.POST)
+    public String deleteOldBook(HttpServletRequest req, HttpServletResponse res){
+        String bid = req.getParameter("bid");
+        bookService.delete(bid);
+        return "redirect:/OldBook/oldBookList";
+    }
+    @RequestMapping("/oldBookList")
+    public String oldBookList(HttpServletRequest req, HttpServletResponse res,Model model){
+        Object sessionUser = req.getSession().getAttribute("sessionUser");
+        User user=new User();
+        if(Objects.nonNull(sessionUser)){
+            user= (User)sessionUser;
+        }
+        List<OldBook> oldBooks = bookService.oldBookList(user.getUid());
+        PageBean<OldBook> oldBookPageBean = new PageBean<>();
+        oldBookPageBean.setPc(1);
+        oldBookPageBean.setTr(oldBooks.size());
+        oldBookPageBean.setPs(100);
+        oldBookPageBean.setBeanList(oldBooks);
+        model.addAttribute("pb",oldBookPageBean);
+        return "jsps/oldBookExchange/list";
     }
     @RequestMapping("/add")
     public String addOldBook(HttpServletRequest req, HttpServletResponse res,@RequestParam("file") MultipartFile file) throws InvocationTargetException, IllegalAccessException, IOException {

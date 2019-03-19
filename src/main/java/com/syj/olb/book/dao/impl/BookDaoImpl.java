@@ -40,7 +40,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public int findBookCountByCategory(String cid) {
-        return 0;
+        return bookMapper.findBookCountByCategory(cid);
     }
 
     /**

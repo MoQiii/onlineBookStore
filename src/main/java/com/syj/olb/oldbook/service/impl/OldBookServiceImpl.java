@@ -19,6 +19,12 @@ public class OldBookServiceImpl implements OldBookService {
 
     @Resource(name="oldBookDaoImpl")
     public OldBookDao bookDao;
+
+    @Override
+    public List<OldBook> oldBookList(String uid) {
+        return bookDao.oldBookList(uid);
+    }
+
     /**
      * 删除图书
      *
@@ -26,7 +32,7 @@ public class OldBookServiceImpl implements OldBookService {
      */
     @Override
     public void delete(String bid) {
-
+        bookDao.delete(bid);
     }
 
     /**

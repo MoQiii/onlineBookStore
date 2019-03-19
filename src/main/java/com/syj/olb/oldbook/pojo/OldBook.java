@@ -13,8 +13,8 @@ public class OldBook {
 	private String bid;//主键
 	private String bname;//图名
 	private String author;//作者
-	private double price;//定价
-	private double originalPrice;//定价
+	private double price;//现价
+	private double originalPrice;//新书价
 	private double currPrice;//当前价
 	private double discount;//折扣
 	private String press;//出版社

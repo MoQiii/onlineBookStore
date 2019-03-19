@@ -280,14 +280,15 @@ public class OrderController {
      * @throws ServletException
      * @throws IOException
      */
+    @RequestMapping("/createOrder")
     public String createOrder(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         /*
          * 1. 获取所有购物车条目的id，查询之
          */
         String cartItemIds = req.getParameter("cartItemIds");
-        String[] split = cartItemIds.split(",");
-        List<String> ids = Arrays.asList(split);
+        String[] cartItemIdList = cartItemIds.split(",");
+        List<String> ids = Arrays.asList(cartItemIdList);
         List<CartItem> cartItemList = cartItemService.loadCartItems(cartItemIds);
         if(cartItemList.size() == 0) {
             req.setAttribute("code", "error");
@@ -307,7 +308,7 @@ public class OrderController {
 
         BigDecimal total = new BigDecimal("0");
         for(CartItem cartItem : cartItemList) {
-            total = total.add(new BigDecimal(cartItem.getSubtotal() + ""));
+            total = total.add(new BigDecimal(cartItem.getSubTotal() + ""));
         }
         order.setTotal(total.doubleValue());//设置总计
 
@@ -320,7 +321,7 @@ public class OrderController {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrderItemId(UUID.randomUUID().toString());//设置主键
             orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setSubtotal(cartItem.getSubtotal());
+            orderItem.setSubtotal(cartItem.getSubTotal().doubleValue());
             orderItem.setBook(cartItem.getBook());
             orderItem.setOrder(order);
             orderItemList.add(orderItem);

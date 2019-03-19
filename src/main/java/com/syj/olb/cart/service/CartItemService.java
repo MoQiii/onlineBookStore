@@ -13,11 +13,9 @@ public interface CartItemService {
 
     /**
      * 修改购物车条目数量
-     * @param cartItemId
-     * @param quantity
      * @return
      */
-    public void updateQuantity(String cartItemId, int quantity);
+    public void updateQuantity(CartItem cartItem);
 
     /**
      * 批量删除功能

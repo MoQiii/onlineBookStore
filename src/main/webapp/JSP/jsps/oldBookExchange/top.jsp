@@ -48,6 +48,7 @@
 	</c:when>
 	<c:otherwise>
 		      书城会员：${sessionScope.sessionUser.loginname }&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="<c:url value='/user/index'/>" target="_parent">首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		  <a href="<c:url value='/Cart/myCart'/>" target="body">我的购物车</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		  <a href="<c:url value='/order/myOrders'/>" target="body">我的订单</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		  <a href="<c:url value='/JSP/jsps/user/pwd.jsp'/>" target="body">修改密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;

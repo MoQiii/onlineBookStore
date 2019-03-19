@@ -14,14 +14,14 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="<c:url value='/jquery/jquery-1.5.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.js'/>"></script>
 	<script type="text/javascript">
 		function checkForm() {
 			if(!$("#cname").val()) {
 				alert("分类名不能为空！");
 				return false;
 			}
-			if(!$("#desc").val()) {
+			if(!$("#description").val()) {
 				alert("分类描述不能为空！");
 				return false;
 			}
@@ -37,11 +37,11 @@
     <h3>修改1级分类</h3>
     <h1></h1>
     <p style="font-weight: 900; color: red">${msg }</p>
-    <form action="<c:url value='/admin/AdminCategoryServlet'/>" method="post" onsubmit="return checkForm()">
+    <form action="<c:url value='/AdminCategory/editParent'/>" method="post" onsubmit="return checkForm()">
     	<input type="hidden" name="cid" value="${parent.cid }"/>
-    	<input type="hidden" name="method" value="editParent"/>
+    	<%--<input type="hidden" name="method" value="editParent"/>--%>
     	分类名称：<input type="text" name="cname" id="cname" value="${parent.cname }"/><br/>
-    	分类描述：<textarea rows="5" cols="50" id="desc" name="desc">${parent.desc }</textarea><br/>
+    	分类描述：<textarea rows="5" cols="50" id="description" name="description">${parent.description }</textarea><br/>
     	<input type="submit" value="修改分类"/>
     	<input type="button" value="返回" onclick="history.go(-1)"/>
     </form>

@@ -63,7 +63,7 @@
 			<span class="menuTitleText" style="font-size:10pt;float: left;text-align: center"><a href="<c:url value='/OldBook/addView'/>"  style="text-align: center" target="body">上架旧书</a></span>
 		</div>
 	<div id="add"  class="menuTitle" style="background-color:#15B69A;border-right-color:gray;border-bottom-color:gray;">
-		<span class="menuTitleText" style="font-size:10pt;float: left;text-align: center"><a href="<c:url value='/OldBook/addView'/>"  style="text-align: center" target="body">出售列表</a></span>
+		<span class="menuTitleText" style="font-size:10pt;float: left;text-align: center"><a href="<c:url value='/OldBook/oldBookList'/>"  style="text-align: center" target="body">出售列表</a></span>
 	</div>
 	<%--</c:if>--%>
 

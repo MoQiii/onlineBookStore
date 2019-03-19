@@ -15,6 +15,13 @@ public class OldBookDaoImpl implements OldBookDao {
 
     @Autowired
     public OldBookMapper oldBookMapper;
+
+    @Override
+    public List<OldBook> oldBookList(String uid) {
+
+        return oldBookMapper.oldBookList(uid);
+    }
+
     /**
      * 删除图书
      *
@@ -22,7 +29,7 @@ public class OldBookDaoImpl implements OldBookDao {
      */
     @Override
     public void delete(String bid) {
-
+        oldBookMapper.delete(bid);
     }
 
     /**
