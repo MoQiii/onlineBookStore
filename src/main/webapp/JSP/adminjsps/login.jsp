@@ -49,8 +49,11 @@
 	密　　　码：<input type="password" name="adminpwd" id="adminpwd"/><br/>
 	<input type="submit" value="进入后台"/>
 </form>
-  </body>--%>
 
+
+
+
+  </body>--%>
   <body class="text-center">
   <form class="form-signin" action="/admin/login" method="post">
 	  <img class="mb-4" src="/pic/bootstrap-solid.svg" alt="" width="72" height="72">
