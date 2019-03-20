@@ -51,8 +51,6 @@
 </form>
 
 
-
-
   </body>--%>
   <body class="text-center">
   <form class="form-signin" action="/admin/login" method="post">
