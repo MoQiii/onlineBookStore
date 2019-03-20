@@ -12,6 +12,12 @@ public interface CategoryService {
     public Category findCategoryByCname( String Cname);
     public void add(Category category);
     /**
+     * 查询指定父分类下的所有子分类
+     * @param pid
+     * @return
+     */
+    public List<Category> findChildren(String pid);
+    /**
      * 删除分类
      * @param cid
      */

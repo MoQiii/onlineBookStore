@@ -52,7 +52,7 @@
   </body>--%>
 
   <body class="text-center">
-  <form class="form-signin" action="/admin/login">
+  <form class="form-signin" action="/admin/login" method="post">
 	  <img class="mb-4" src="/pic/bootstrap-solid.svg" alt="" width="72" height="72">
 	  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 	  <label for="adminname" class="sr-only">用户名</label>

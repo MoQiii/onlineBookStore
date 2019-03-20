@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-@Service()
+@Service
 public class CategoryServiceImpl implements CategoryService {
     @Resource(name="categoryDaoImpl")
     public CategoryDao categoryDao;
@@ -37,6 +37,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void add(Category category) {
         categoryDao.add(category);
+    }
+
+    /**
+     * 查询指定父分类下的所有子分类
+     *
+     * @param pid
+     * @return
+     */
+    @Override
+    public List<Category> findChildren(String pid) {
+        return null;
     }
 
     /**
