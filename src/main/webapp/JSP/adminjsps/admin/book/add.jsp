@@ -16,11 +16,13 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/book/add.css'/>">
-<link rel="stylesheet" type="text/css" href="<c:url value='/jquery/jquery.datepick.css'/>">
-<script type="text/javascript" src="<c:url value='/jquery/jquery-1.5.1.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/jquery/jquery.datepick.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/jquery/jquery.datepick-zh-CN.js'/>"></script>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/book/add.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jquery/jquery.datepick.css'/>">
+	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/JSP/jquery/jquery.datepick.js'/>"></script>
+	  <script type="text/javascript" src="<c:url value='/JSP/jquery/jquery.datepick-zh-CN.js'/>"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/vue/vue.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/vue/vue-resource.js"></script>
 <script type="text/javascript">
 $(function () {
 	$("#publishtime").datepick({dateFormat:"yy-mm-dd"});
@@ -78,7 +80,7 @@ function loadChildren() {
 	$.ajax({
 		async:true,
 		cache:false,
-		url:"/goods/admin/AdminBookServlet",
+		url:"http://localhost:8080/adminbook/ajaxFindChildren",
 		data:{method:"ajaxFindChildren", pid:pid},
 		type:"POST",
 		dataType:"json",
@@ -136,22 +138,24 @@ function loadChildren() {
 				<td width="250">开本：　　<input type="text" name="booksize" id="booksize" value="16" style="width:30px;"/></td>
 				<td>纸张：　　<input type="text" name="paper" id="paper" value="胶版纸" style="width:80px;"/></td>
 			</tr>
-			<tr>
-				<td>
-					一级分类：<select name="pid" id="pid" onchange="loadChildren()">
-						<option value="">====请选择1级分类====</option>
-<c:forEach items="${parents }" var="parent">
-			    		<option value="${parent.cid }">${parent.cname }</option>
-</c:forEach>
-
+			<tr><td>
+				<div id="category">
+					<div style="margin-bottom: 8px"><span>一级种类 : </span>
+					<select v-model="pc" name="parentCategory"style="height: 27px;width: 170px" @change="getCC()" >
+						<option v-for="pc in pcs" :key="pc.cid">
+							{{pc.cname}}
+						</option>
 					</select>
-				</td>
-				<td>
-					二级分类：<select name="cid" id="cid">
-						<option value="">====请选择2级分类====</option>
-					</select>
-				</td>
-				<td></td>
+				</div>
+					<div style="margin-bottom: 8px"><span>二级种类 : </span>
+					   <select v-model="cc" name="childCategory" style="height: 27px;width: 170px">
+						<option v-for="cc in ccs" :key="cc.id" >
+							{{cc.cname}}
+						</option>
+					   </select>
+				     </div>
+				</div>
+	   </td>
 			</tr>
 			<tr>
 				<td>
@@ -166,4 +170,36 @@ function loadChildren() {
   </div>
 
   </body>
+  <script >
+      var path="http://localhost:8080";
+      var vue = new Vue({
+          el:'#category',
+          data:{
+              pcs:'',
+              pc:'',
+              ccs:'',
+              cc:'',
+              cid:''
+          },
+          created:function () {
+              this.getPc();
+          },
+          methods:{
+              getPc : function(){
+                  this.$http.get(path+"/Category/findParentCategory").then(function (result) {
+                      this.pcs=result.body;
+                  });
+              },
+              getCC:function () {
+                  this.$http.get(path+"/Category/findChildCategoryByPC?pc="+this.pc).then(function (result) {
+                      this.ccs=result.body;
+                  });
+              }
+          },
+          beforeupdate () {
+
+          }
+      });
+
+  </script>
 </html>

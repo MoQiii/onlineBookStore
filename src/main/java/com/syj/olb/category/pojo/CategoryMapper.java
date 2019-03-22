@@ -27,4 +27,7 @@ public interface CategoryMapper {
     public int delete(@Param("cid")String cid);
     @Select("select * from t_category where pid is null order by orderBy")
     public List<Category> findParents();
+    @Select("select * from t_category where pid=#{pid}")
+    public List<Category> findChildren(@Param("pid") String pid);
+
 }

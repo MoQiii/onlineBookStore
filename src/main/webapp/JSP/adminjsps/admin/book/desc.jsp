@@ -16,30 +16,38 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/book/desc.css'/>">
-<link rel="stylesheet" type="text/css" href="<c:url value='/jquery/jquery.datepick.css'/>">
-<script type="text/javascript" src="<c:url value='/jquery/jquery-1.5.1.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/jquery/jquery.datepick.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/jquery/jquery.datepick-zh-CN.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/book/desc.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jquery/jquery.datepick.css'/>">
+<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/JSP/jquery/jquery.datepick.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/JSP/jquery/jquery.datepick-zh-CN.js'/>"></script>
 
-<script type="text/javascript" src="<c:url value='/adminjsps/admin/js/book/desc.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/JSP/adminjsps/admin/js/book/desc.js'/>"></script>
 
 <script type="text/javascript">
 
 $(function() {
-	$("#box").attr("checked", false);
-	$("#formDiv").css("display", "none");
-	$("#show").css("display", "");	
+	//$("#box").attr("checked", "");
+	$("#formDiv").hide();
+	$("#show").show();
 	
 	// 操作和显示切换
 	$("#box").click(function() {
-		if($(this).attr("checked")) {
-			$("#show").css("display", "none");
-			$("#formDiv").css("display", "");
+        $("#formDiv").toggle();
+        $("#show").toggle();
+	   /* alert($(this).attr("checked"));
+		if($(this).attr("checked")=="checked") {
+            $("#formDiv").show();
+            $("#show").hide();
+            $(this).attr("checked","true");
+		/!*	$("#show").css("display", "none");
+			$("#formDiv").css("display", "");*!/
 		} else {
-			$("#formDiv").css("display", "none");
-			$("#show").css("display", "");		
-		}
+            $("#show").show();
+            $("#formDiv").hide();
+            $(this).attr("checked","false");
+			/!*$("#formDiv").css("display", "none");
+			$("#show").css("display", "");		*!/*/
 	});
 });
 
@@ -58,8 +66,8 @@ function loadChildren() {
 	$.ajax({
 		async:true,
 		cache:false,
-		url:"/goods/admin/AdminBookServlet",
-		data:{method:"ajaxFindChildren", pid:pid},
+		url:"http://localhost:8080/adminbook/ajaxFindChildren",
+		data:{ pid:pid},
 		type:"POST",
 		dataType:"json",
 		success:function(arr) {
@@ -79,14 +87,16 @@ function loadChildren() {
  * 点击编辑按钮时执行本函数
  */
 function editForm() {
-	$("#method").val("edit");
+//	$("#method").val("edit");
+    $("#form").attr("action","/adminbook/edit");
 	$("#form").submit();
 }
 /*
  * 点击删除按钮时执行本函数
  */
  function deleteForm() {
-	$("#method").val("delete");
+//	$("#method").val("delete");
+     $("#form").attr("action","/adminbook/delete");
 	$("#form").submit();	
 }
 
@@ -115,7 +125,7 @@ function editForm() {
 			</tr>
 			<tr>
 				<td colspan="3">
-					出版社：${book.press }</a>
+					出版社：${book.press }
 				</td>
 			</tr>
 			<tr>
@@ -138,8 +148,8 @@ function editForm() {
   
   <div id='formDiv'>
    <div class="sm">&nbsp;</div>
-   <form action="<c:url value='/admin/AdminBookServlet'/>" method="post" id="form">
-    <input type="hidden" name="method" id="method"/>
+   <form action="" method="post" id="form">
+    <%--<input type="hidden" name="method" id="method"/>--%>
    	<input type="hidden" name="bid" value="${book.bid }"/>
     <img align="top" src="<c:url value='/${book.image_w }'/>" class="tp"/>
     <div style="float:left;">

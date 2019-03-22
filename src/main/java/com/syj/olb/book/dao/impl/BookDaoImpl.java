@@ -19,7 +19,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public void delete(String bid) {
-
+        bookMapper.delete(bid);
     }
 
     /**
@@ -29,7 +29,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public void edit(Book book) {
-
+        bookMapper.edit(book);
     }
 
     /**

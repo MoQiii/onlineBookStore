@@ -20,4 +20,8 @@ public interface OrderMapper {
     public Order load(@Param("oid") String oid);
     @Select("select status from t_order where oid=#{oid}")
     public int findStatus(@Param("oid") String oid);
+    @Select("select * from t_order where 1=1 order by ordertime desc limit #{pc},#{ps}")
+    public List<Order> findAll(@Param("pc") int pc,@Param("ps")int ps);
+    @Select("select * from t_order where status=#{status} order by ordertime desc limit #{pc},#{ps}")
+    public List<Order> findByStatus(@Param("status")int status, @Param("pc")int pc,@Param("ps")int ps);
 }

@@ -1,8 +1,6 @@
 package com.syj.olb.order.dao.impl;
 
-import com.syj.olb.book.pojo.Expression;
-import com.syj.olb.book.pojo.PageBean;
-import com.syj.olb.book.pojo.PageConstants;
+import com.syj.olb.book.pojo.*;
 import com.syj.olb.order.dao.OrderDao;
 import com.syj.olb.order.pojo.Order;
 import com.syj.olb.order.pojo.OrderItem;
@@ -21,6 +19,8 @@ public class OrderDaoImpl implements OrderDao {
     private OrderMapper orderMapper;
     @Autowired
     private OrderItemMapper orderItemMapper;
+    @Autowired
+    private BookMapper bookMapper;
     /**
      * 查询订单状态
      *
@@ -52,8 +52,18 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public Order load(String oid) {
-
-        return orderMapper.load(oid);
+        Order order = orderMapper.load(oid);
+        List<OrderItem> orderItems = orderItemMapper.findByOrder(order);
+        order.setOrderItemList(orderItems);
+        List<String> list=new ArrayList<>();
+        for(OrderItem orderItem:orderItems){
+            list.add(orderItem.getBid());
+        }
+        List<Book> books = bookMapper.findByBids(list);
+        for(int i=0;i<orderItems.size();i++){
+            orderItems.get(i).setBook(books.get(i));
+        }
+        return order;
     }
 
     /**
@@ -102,8 +112,23 @@ public class OrderDaoImpl implements OrderDao {
      * @param pc
      */
     @Override
-    public PageBean<Order> findAll(int pc) {
-        return null;
+    public List<Order> findAll(int pc) {
+        List<Order> all = orderMapper.findAll(pc - 1, pc * 8);
+        for(Order order:all){
+            List<OrderItem> byOrder = orderItemMapper.findByOrder(order);
+            List<String> list=new ArrayList<>();
+            for (OrderItem orderItem:byOrder)
+            {
+                list.add(orderItem.getBid());
+            }
+            List<Book> books = bookMapper.findByBids(list);
+            for (int i=0;i<byOrder.size();i++)
+            {
+                byOrder.get(i).setBook(books.get(i));
+            }
+            order.setOrderItemList(byOrder);
+        }
+        return all;
     }
 
     /**
@@ -115,7 +140,12 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public PageBean<Order> findByStatus(int status, int pc) {
-        return null;
+        List<Order> byStatus = orderMapper.findByStatus(status, (pc - 1) * 8, 8);
+        PageBean<Order> pb=new PageBean();
+        pb.setBeanList(byStatus);
+        pb.setPc(pc);
+        pb.setPs(8);
+        return pb;
     }
 
     @Override

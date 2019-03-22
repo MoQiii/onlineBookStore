@@ -42,7 +42,7 @@ public interface OrderDao {
     /**
      * 查询所有
      */
-    public PageBean<Order> findAll(int pc);
+    public List<Order> findAll(int pc);
     /**
      * 按状态查询
      * @param status

@@ -11,6 +11,7 @@ public interface CategoryDao {
     public  List<Category> findChildCategoryByPC(String cname);
     public Category findCategoryByCname(String Cname);
     public void add(Category category);
+    public List<Category> findChildren(String pid);
     /**
      * 删除分类
      * @param cid

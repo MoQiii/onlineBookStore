@@ -16,7 +16,7 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/order/desc.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/order/desc.css'/>">
   </head>
   
 <body>
@@ -51,9 +51,6 @@
 							<th class="tt" align="left">小计</th>
 						</tr>
 
-
-
-
 <c:forEach items="${order.orderItemList }" var="orderItem">
 						<tr style="padding-top: 20px; padding-bottom: 20px;">
 							<td class="td" width="400px">
@@ -74,9 +71,6 @@
 						</tr>
 </c:forEach>
 
-							
-							
-							
 					</table>
 				</dd>
 			</dl>
@@ -86,10 +80,10 @@
 			<span class="price_t">&yen;${order.total }</span><br/>
 
 <c:if test="${order.status eq 2 and btn eq 'deliver' }">
-	<a id="deliver" href="<c:url value='/admin/AdminOrderServlet?method=deliver&oid=${order.oid }'/>">发　　货</a>
+	<a id="deliver" href="<c:url value='/adminorder/deliver?oid=${order.oid }'/>">发　　货</a>
 </c:if>
 <c:if test="${order.status eq 1 and btn eq 'cancel' }">
-	<a id="cancel" href="<c:url value='/admin/AdminOrderServlet?method=cancel&oid=${order.oid }'/>">取　　消</a>
+	<a id="cancel" href="<c:url value='/adminorder/cancel?oid=${order.oid }'/>">取　　消</a>
 </c:if>
 		</div>
 	</div>

@@ -16,12 +16,12 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/book/list.css'/>">
-<script type="text/javascript" src="<c:url value='/jquery/jquery-1.5.1.js'/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/pager/pager.css'/>" />
-<script type="text/javascript" src="<c:url value='/jsps/pager/pager.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/book/list.css'/>">
+<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/pager/pager.css'/>" />
+<script type="text/javascript" src="<c:url value='/JSP/jsps/pager/pager.js'/>"></script>
 
-<script type="text/javascript" src="<c:url value='/adminjsps/admin/js/book/list.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/JSP/adminjsps/admin/js/book/list.js'/>"></script>
   </head>
   
   <body>
@@ -32,21 +32,21 @@
 <c:forEach items="${pb.beanList }" var="book">
  <li>
   <div class="inner">
-    <a class="pic" href="<c:url value='/admin/AdminBookServlet?method=load&bid=${book.bid }'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
+    <a class="pic" href="<c:url value='/adminbook/load?bid=${book.bid }'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
     <p class="price" >
 		<span class="price_n">&yen;${book.currPrice }</span>
 		<span class="price_r">&yen;${book.price }</span>
 		(<span class="price_s">${book.discount }折</span>)
 	</p>
-	<c:url value="/admin/AdminBookServlet" var="authorUrl">
-		<c:param name="method" value="findByAuthor"/>
+	<c:url value="/adminbook/findByAuthor" var="authorUrl">
+		<%--<c:param name="method" value="findByAuthor"/>--%>
 		<c:param name="author" value="${book.author }"/>
 	</c:url>
-	<c:url value="/admin/AdminBookServlet" var="pressUrl">
-		<c:param name="method" value="findByPress"/>
+	<c:url value="/adminbook/findByPress" var="pressUrl">
+		<%--<c:param name="method" value="findByPress"/>--%>
 		<c:param name="press" value="${book.press }"/>
 	</c:url>
-	<p><a id="bookname" title="${book.bname }" href="<c:url value='/admin/AdminBookServlet?method=load&bid=${book.bid }'/>">${book.bname }</a></p>
+	<p><a id="bookname" title="${book.bname }" href="<c:url value='/adminbook/load?bid=${book.bid }'/>">${book.bname }</a></p>
 	<p><a href="${authorUrl }" name='P_zz' title='${book.author }'>${book.author }</a></p>
 	<p class="publishing">
 		<span>出版社：</span><a href="${pressUrl }">${book.press }</a>
@@ -65,7 +65,7 @@
 <div style="float:left; width: 100%; text-align: center;">
 	<hr/>
 	<br/>
-	<%@include file="/jsps/pager/pager.jsp" %>
+	<%@include file="/JSP/jsps/pager/pager.jsp" %>
 </div>
   </body>
  

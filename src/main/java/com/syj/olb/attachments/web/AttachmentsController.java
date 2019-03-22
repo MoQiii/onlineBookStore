@@ -14,6 +14,6 @@ public class AttachmentsController {
     private AttachmentsService attachmentsService;
     @RequestMapping("/addAttachments")
     public void addAttachments(Attachments attachments){
-        attachmentsService.insertOldBook(attachments);
+  //      attachmentsService.insertOldBook(attachments);
     }
 }

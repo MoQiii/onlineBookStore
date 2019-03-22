@@ -64,11 +64,11 @@ public class AdminBookController {
          * 4. 调用service完成工作
          * 5. 保存成功信息，转发到msg.jsp
          */
-        Map map = req.getParameterMap();
+//        Map map = req.getParameterMap();
    //     Book book = CommonUtils.toBean(map, Book.class);
     //    Category category = CommonUtils.toBean(map, Category.class);
         book.setCategory(category);
-
+        book.setCid(category.getCid());
         bookService.edit(book);
         req.setAttribute("msg", "修改图书成功！");
         return "adminjsps/msg";
@@ -96,7 +96,9 @@ public class AdminBookController {
         /*
          * 3. 获取当前图书所属的一级分类下所有2级分类
          */
-        String pid = book.getCategory().getParent().getCid();
+
+        Category load = categoryService.load(book.getCid());
+        String pid = load.getPid();
         req.setAttribute("children", categoryService.findChildren(pid));
 
         /*

@@ -9,9 +9,8 @@ import com.syj.olb.cart.service.CartItemService;
 import com.syj.olb.order.pojo.Order;
 import com.syj.olb.order.pojo.OrderItem;
 import com.syj.olb.order.service.OrderItemService;
-import com.syj.olb.order.service.OrderServcie;
+import com.syj.olb.order.service.OrderService;
 import com.syj.olb.user.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +27,7 @@ import java.util.*;
 @RequestMapping("/order")
 public class OrderController {
     @Resource(name="OrderServiceImpl")
-    private OrderServcie orderService;
+    private OrderService orderService;
     @Resource(name="cartItemServiceImpl")
     private CartItemService cartItemService;
     @Resource(name="bookServiceImpl")

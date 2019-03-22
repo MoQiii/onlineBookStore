@@ -47,7 +47,8 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public List<Category> findChildren(String pid) {
-        return null;
+
+        return categoryDao.findChildren(pid);
     }
 
     /**

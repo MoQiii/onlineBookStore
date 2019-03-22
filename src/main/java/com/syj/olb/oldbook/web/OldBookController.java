@@ -99,13 +99,14 @@ public class OldBookController {
 
         Category categoryByCname = categoryService.findCategoryByCname(childCategory);
         oldBook.setCategory(categoryByCname);
-        String rPath="";
+
         Attachments attachments = new Attachments();
         attachments.setBusiId(uuid.toString().substring(0,10));
         attachments.setBusiType("oldBookPic");
 
         String originalFilename = file.getOriginalFilename();
         String savePath = "/oldBookPic"+"/"+ System.currentTimeMillis();
+        String rPath="";
         rPath=path+savePath;
         attachments.setFileUrl(rPath);
 
@@ -121,23 +122,8 @@ public class OldBookController {
         oldBook.setImage_b(savePath+"/"+attachments.getSaveName());
         oldBook.setImage_w(savePath+"/"+attachments.getSaveName());
         //读取文件内容
-        attachmentsService.insertOldBook(attachments);
-        byte[] aByte=null;
-        try(InputStream inputStream = file.getInputStream()){
-           aByte = new byte[inputStream.available()];
-            inputStream.read(aByte);
-        }
-        //写入磁盘
-        File mkdir=new File(rPath);
-        if(!mkdir.exists()){
-            mkdir.mkdirs();
-        }
-      //  rPath+="/"+originalFilename;
-        rPath+="/"+attachments.getSaveName();
-        try(BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(rPath))){
-            bos.write(aByte);
-            bos.flush();
-        }
+        attachmentsService.insertAttachments(attachments,file,rPath);
+
 
         //  FileInputStream fis=new FileInputStream(file.getInputStream());
         oldBook.setBid(uuid.toString().substring(0,10));

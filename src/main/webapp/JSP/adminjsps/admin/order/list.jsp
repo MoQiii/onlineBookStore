@@ -16,20 +16,22 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/pager/pager.css'/>" />
-    <script type="text/javascript" src="<c:url value='/jsps/pager/pager.js'/>"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/order/list.css'/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/pager/pager.css'/>" />
+    <script type="text/javascript" src="<c:url value='/JSP/jsps/pager/pager.js'/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/order/list.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/css.css'/>" />
-
+	  <script type="text/javascript" src="/vue/vue.js"></script>
+	  <script type="text/javascript" src="/vue/vue-resource.js"></script>
   </head>
   
   <body>
+  <div id="orderDiv">
 <p class="pLink">
-  <a href="<c:url value='/admin/AdminOrderServlet?method=findByStatus&status=1'/>">未付款</a>  | 
-  <a href="<c:url value='/admin/AdminOrderServlet?method=findByStatus&status=2'/>">已付款</a>  | 
-  <a href="<c:url value='/admin/AdminOrderServlet?method=findByStatus&status=3'/>">已发货</a>  | 
-  <a href="<c:url value='/admin/AdminOrderServlet?method=findByStatus&status=4'/>">交易成功</a>  | 
-  <a href="<c:url value='/admin/AdminOrderServlet?method=findByStatus&status=5'/>">已取消</a>
+  <a href="<c:url value='/adminorder/findByStatus?status=1'/>">未付款</a>  |
+  <a href="<c:url value='/adminorder/findByStatus?status=2'/>">已付款</a>  |
+  <a href="<c:url value='/adminorder/findByStatus?status=3'/>">已发货</a>  |
+  <a href="<c:url value='/adminorder/findByStatus?status=4'/>">交易成功</a>  |
+  <a href="<c:url value='/adminorder/findByStatus?status=5'/>">已取消</a>
 </p>
 <div class="divMain">
 	<div class="title">
@@ -45,7 +47,7 @@
 <c:forEach items="${pb.beanList }" var="order">	
 	
 		<tr class="tt">
-			<td width="320px">订单号：<a  href="<c:url value='/admin/AdminOrderServlet?method=load&oid=${order.oid }'/>">${order.oid }</a></td>
+			<td width="320px">订单号：<a  href="<c:url value='/adminorder/load?oid=${order.oid }'/>">${order.oid }</a></td>
 			<td width="200px">下单时间：${order.ordertime }</td>
 			<td width="178px">&nbsp;</td>
 			<td width="205px">&nbsp;</td>
@@ -75,12 +77,12 @@
 			</td>
 						
 			<td>
-			<a href="<c:url value='/admin/AdminOrderServlet?method=load&oid=${order.oid }'/>">查看</a><br/>
+			<a href="<c:url value='/adminorder/load?oid=${order.oid }'/>">查看</a><br/>
 <c:if test="${order.status eq 1 }">
-				<a href="<c:url value='/admin/AdminOrderServlet?method=load&oid=${order.oid }&btn=cancel'/>">取消</a><br/>						
+				<a href="<c:url value='/adminorder/load?oid=${order.oid }&btn=cancel'/>">取消</a><br/>
 </c:if>
 <c:if test="${order.status eq 2 }">
-				<a href="<c:url value='/admin/AdminOrderServlet?method=load&oid=${order.oid }&btn=deliver'/>">发货</a><br/>
+				<a href="<c:url value='/adminorder/load?oid=${order.oid }&btn=deliver'/>">发货</a><br/>
 </c:if>			
 
 			</td>
@@ -89,7 +91,40 @@
 
 	</table>
 	<br/>
-	<%@include file="/jsps/pager/pager.jsp" %>
+	<%@include file="/JSP/jsps/pager/pager.jsp" %>
 </div>
+	  </div>
   </body>
+<%--  <script >
+
+      var vue = new Vue({
+          el:'#category',
+          data:{
+              pcs:'',
+              pc:'',
+              ccs:'',
+              cc:'',
+              cid:''
+          },
+          created:function () {
+              this.getPc();
+          },
+          methods:{
+              getPc : function(){
+                  this.$http.get(path+"/Category/findParentCategory").then(function (result) {
+                      this.pcs=result.body;
+                  });
+              },
+              getCC:function () {
+                  this.$http.get(path+"/Category/findChildCategoryByPC?pc="+this.pc).then(function (result) {
+                      this.ccs=result.body;
+                  });
+              }
+          },
+          beforeupdate () {
+
+          }
+      });
+
+  </script>--%>
 </html>

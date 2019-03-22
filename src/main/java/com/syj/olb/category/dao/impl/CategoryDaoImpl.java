@@ -48,6 +48,12 @@ public class CategoryDaoImpl implements CategoryDao {
         categoryMapper.add(category);
     }
 
+    @Override
+    public List<Category> findChildren(String pid) {
+
+        return categoryMapper.findChildren(pid);
+    }
+
     /**
      * 删除分类
      *

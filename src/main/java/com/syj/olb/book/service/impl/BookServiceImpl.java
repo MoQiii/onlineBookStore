@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public void delete(String bid) {
-
+        bookDao.delete(bid);
     }
 
     /**
@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public void edit(Book book) {
-
+        bookDao.edit(book);
     }
 
     /**

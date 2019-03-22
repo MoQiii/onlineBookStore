@@ -3,13 +3,16 @@ package com.syj.olb.order.service.impl;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.order.dao.OrderDao;
 import com.syj.olb.order.pojo.Order;
-import com.syj.olb.order.service.OrderServcie;
+import com.syj.olb.order.service.OrderService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("OrderServiceImpl")
-public class OrderServiceImpl implements OrderServcie {
+@Transactional
+public class OrderServiceImpl implements OrderService {
     @Resource(name="OrderDaoImpl")
     private OrderDao orderDao;
     /**
@@ -77,7 +80,8 @@ public class OrderServiceImpl implements OrderServcie {
      */
     @Override
     public PageBean<Order> findByStatus(int status, int pc) {
-        return null;
+
+        return orderDao.findByStatus(status,pc);
     }
 
     /**
@@ -87,7 +91,8 @@ public class OrderServiceImpl implements OrderServcie {
      * @return
      */
     @Override
-    public PageBean<Order> findAll(int pc) {
-        return null;
+    public List<Order> findAll(int pc) {
+
+        return orderDao.findAll(pc);
     }
 }

@@ -3,7 +3,9 @@ package com.syj.olb.order.service;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.order.pojo.Order;
 
-public interface OrderServcie {
+import java.util.List;
+
+public interface OrderService {
     /**
      * 修改订单状态
      * @param oid
@@ -47,7 +49,7 @@ public interface OrderServcie {
      * @param pc
      * @return
      */
-    public PageBean<Order> findAll(int pc);
+    public List<Order> findAll(int pc);
 
 
 

@@ -14,13 +14,19 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+<script type="text/javascript">
 
+    function back() {
+        history.go(-2);
+        self.location=document.referrer;
+    }
+</script>
   </head>
 <style type="text/css">
 	body {background: rgb(254,238,189);}
 </style>
   <body>
 <h2>${msg }</h2>
-<input type="button" value="返回" onclick="history.go(-1)"/>
+<input type="button" value="返回" onclick="back() "/>
   </body>
 </html>
