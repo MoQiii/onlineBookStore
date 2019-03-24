@@ -46,6 +46,7 @@ public class AdminBookController {
         bookService.delete(bid);//删除数据库的记录
 
         req.setAttribute("msg", "删除图书成功！");
+        req.setAttribute("flag", "1");
         return "adminjsps/msg";
     }
 

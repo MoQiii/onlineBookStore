@@ -6,11 +6,13 @@ import com.syj.olb.book.pojo.BookQuery;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.book.service.BookService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
     @Resource(name="bookDaoImpl")
@@ -129,7 +131,8 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public PageBean<Book> findByCombination(Book criteria, int pc) {
-        return null;
+
+        return bookDao.findByCombination(criteria,pc);
     }
 
     /**

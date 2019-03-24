@@ -15,7 +15,7 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/css/order/pay.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/css/order/pay.css'/>">
 	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 
 <script type="text/javascript">
@@ -32,8 +32,8 @@ $(function() {
 	<span class="spanPrice">支付金额：</span><span class="price_t">&yen;${order.total }</span>
 	<span class="spanOid">编号：${order.oid }</span>
 </div>
-<form action="<c:url value='/OrderServlet'/>" method="post" id="form1" target="_top">
-<input type="hidden" name="method" value="payment"/>
+<form action="<c:url value='/order/payment'/>" method="post" id="pay" target="_top">
+<%--<input type="hidden" name="method" value="payment"/>--%>
 <input type="hidden" name="oid" value="${order.oid }"/>
 <div class="divBank">
 	<div class="divText">选择网上银行</div>
@@ -118,7 +118,7 @@ $(function() {
 	  </div>
 	</div>
 	<div style="margin: 40px;">
-		<a href="javascript:void $('#form1').submit();" class="linkNext">下一步</a>
+		<a href="javascript:void $('#pay').submit();" class="linkNext">下一步</a>
 	</div>
 </div>
 </form>

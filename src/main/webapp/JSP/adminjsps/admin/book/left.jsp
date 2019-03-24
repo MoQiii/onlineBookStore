@@ -54,6 +54,6 @@ $(function() {
   
   <%--<body onload="load()">--%>
 <div id="menu"></div>
-  <a href="<c:url value='/adminbook/addPre'/>" style="margin: 20px; font-size: 20px;">添加图书</a>
+<%--  <a href="<c:url value='/adminbook/addPre'/>" style="margin: 20px; font-size: 20px;">添加图书</a>--%>
   </body>
 </html>

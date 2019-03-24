@@ -41,7 +41,7 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public void updateStatus(String oid, int status) {
-
+        orderMapper.updateStatus(oid,status);
     }
 
     /**

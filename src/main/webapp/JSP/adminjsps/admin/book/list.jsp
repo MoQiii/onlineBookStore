@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/JSP/adminjsps/admin/css/book/list.css'/>">
 <script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/pager/pager.css'/>" />
-<script type="text/javascript" src="<c:url value='/JSP/jsps/pager/pager.js'/>"></script>
+<%--<script type="text/javascript" src="<c:url value='/JSP/jsps/pager/pager.js'/>"></script>--%>
 
 <script type="text/javascript" src="<c:url value='/JSP/adminjsps/admin/js/book/list.js'/>"></script>
   </head>

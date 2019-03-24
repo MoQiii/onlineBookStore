@@ -143,7 +143,10 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public PageBean<Book> findByCombination(Book criteria, int pc) {
-        return null;
+        List<Book> books = bookMapper.findByCombination(criteria, (pc - 1) * 8, 8);
+        PageBean<Book> pb=new PageBean<>();
+        pb.setBeanList(books);
+        return pb;
     }
 
     /**

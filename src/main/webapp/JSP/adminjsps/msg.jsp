@@ -20,6 +20,9 @@
         history.go(-2);
         self.location=document.referrer;
     }
+    function One() {
+       window.location.href="http://localhost:8080/JSP/adminjsps/admin/book/main.jsp";
+    }
 </script>
   </head>
 <style type="text/css">
@@ -27,6 +30,17 @@
 </style>
   <body>
 <h2>${msg }</h2>
-<input type="button" value="返回" onclick="back() "/>
+
+
+
+<c:choose>
+    <c:when test="${flag == '1'}">
+       <%-- <input type="button" value="返回" onclick="One() "/>--%>
+        <a href="http://localhost:8080/JSP/adminjsps/admin/book/main.jsp" target="_parent">返回</a>
+    </c:when>
+    <c:otherwise>
+        <input type="button" value="返回" onclick="back() "/>
+    </c:otherwise>
+</c:choose>
   </body>
 </html>

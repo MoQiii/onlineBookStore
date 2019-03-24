@@ -156,7 +156,7 @@ public class AdminOrderController {
         orderService.updateStatus(oid, 5);//设置状态为取消！
         req.setAttribute("code", "success");
         req.setAttribute("msg", "您的订单已取消，您不后悔吗！");
-        return "dminjsps/msg";
+        return "adminjsps/msg";
     }
 
     /**

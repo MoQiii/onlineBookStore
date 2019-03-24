@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public void updateStatus(String oid, int status) {
-
+        orderDao.updateStatus(oid,status);
     }
 
     /**

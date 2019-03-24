@@ -29,4 +29,12 @@ public interface BookMapper {
     public void edit(@Param("book") Book book);
     @Delete("delete from t_book where bid=#{bid}")
     public void delete(@Param("bid") String bid);
+    @Select("<script>" +
+            "select * from  t_book where 1=1" +
+            "<if test=\"criteria.bname!='' and criteria.bname!=null\">and bname like  concat(concat('%',#{criteria.bname}),'%') </if>"+
+            "<if test=\"criteria.author!='' and criteria.author!=null\">and author like  concat(concat('%',#{criteria.author}),'%')</if>"+
+            "<if test=\"criteria.press!='' and criteria.press!=null\">and press like  concat(concat('%',#{criteria.press}),'%')</if>"+
+            " order by orderBy limit #{pc},#{ps}"+
+            "</script>")
+    public List<Book> findByCombination(@Param("criteria") Book criteria, @Param("pc") int pc,@Param("ps") int ps);
 }

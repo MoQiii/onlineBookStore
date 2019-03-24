@@ -11,6 +11,7 @@ import com.syj.olb.order.pojo.OrderItem;
 import com.syj.olb.order.service.OrderItemService;
 import com.syj.olb.order.service.OrderService;
 import com.syj.olb.user.pojo.User;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/order")
+//@PropertySource("classpath:payment.properties")
 public class OrderController {
     @Resource(name="OrderServiceImpl")
     private OrderService orderService;
@@ -95,7 +97,7 @@ public class OrderController {
     @RequestMapping("/payment")
     public String payment(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Properties props = new Properties();
-        props.load(this.getClass().getClassLoader().getResourceAsStream("payment.properties"));
+        props.load(this.getClass().getClassLoader().getResourceAsStream("config/payment.properties"));
         /*
          * 1. 准备13个参数
          */
@@ -142,7 +144,7 @@ public class OrderController {
         sb.append("&").append("pd_FrpId=").append(pd_FrpId);
         sb.append("&").append("pr_NeedResponse=").append(pr_NeedResponse);
         sb.append("&").append("hmac=").append(hmac);
-
+        //重定向到易宝网关
         resp.sendRedirect(sb.toString());
         return null;
     }
@@ -181,7 +183,7 @@ public class OrderController {
          * 2. 获取keyValue
          */
         Properties props = new Properties();
-        props.load(this.getClass().getClassLoader().getResourceAsStream("payment.properties"));
+        props.load(this.getClass().getClassLoader().getResourceAsStream("config/payment.properties"));
         String keyValue = props.getProperty("keyValue");
         /*
          * 3. 调用PaymentUtil的校验方法来校验调用者的身份

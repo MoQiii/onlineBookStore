@@ -80,9 +80,9 @@ public class OldBookController {
         return "jsps/oldBookExchange/list";
     }
     @RequestMapping("/add")
-    public String addOldBook(HttpServletRequest req, HttpServletResponse res,@RequestParam("file") MultipartFile file) throws InvocationTargetException, IllegalAccessException, IOException {
+    public String addOldBook(HttpServletRequest req, HttpServletResponse res,OldBook oldBook,@RequestParam("file") MultipartFile file) throws InvocationTargetException, IllegalAccessException, IOException {
         //获取主键
-        OldBook oldBook=new OldBook();
+  //      OldBook oldBook=new OldBook();
         UUID uuid = UUID.randomUUID();
 
         User user=new User();
