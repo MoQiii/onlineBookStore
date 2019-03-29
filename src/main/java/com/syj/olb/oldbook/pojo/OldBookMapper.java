@@ -22,8 +22,8 @@ public interface OldBookMapper {
     @Select("select * from t_oldbook  where bname like #{bname}  order by orderBy limit #{c},#{ps}")
     public List<OldBook> findByBname(@Param("bname") String bname, @Param("c") int c, @Param("ps") int ps);
 
-    @Insert("insert into t_oldbook(bid,bname,author,currPrice,original_price,publishtime,press,user_id,cid,image_b,image_w) values(#{oldBook.bid}," +
-            "#{oldBook.bname},#{oldBook.author},#{oldBook.currPrice},#{oldBook.originalPrice},#{oldBook.publishtime},#{oldBook.press},#{oldBook.uid},#{oldBook.category.cid}" +
+    @Insert("insert into t_oldbook(bid,bname,author,currPrice,price,publishtime,press,user_id,cid,image_b,image_w) values(#{oldBook.bid}," +
+            "#{oldBook.bname},#{oldBook.author},#{oldBook.currPrice},#{oldBook.price},#{oldBook.publishtime},#{oldBook.press},#{oldBook.uid},#{oldBook.category.cid}" +
             ",#{oldBook.image_b},#{oldBook.image_w})")
     public void addOldBook(@Param("oldBook") OldBook oldBook);
 

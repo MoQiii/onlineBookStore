@@ -42,7 +42,9 @@ public class OldBookController {
     @Resource(name="oldBookServiceImpl")
     private OldBookService bookService;
     @Value("${attachment.filePath}")
-    private String path;
+    private String filePath;
+    @Value("${attachment.fileUrl}")
+    private String fileUrl;
     @Resource(name="categoryServiceImpl")
     private CategoryService categoryService;
     @Resource(name="AttachmentsServiceImpl")
@@ -77,6 +79,7 @@ public class OldBookController {
         oldBookPageBean.setPs(100);
         oldBookPageBean.setBeanList(oldBooks);
         model.addAttribute("pb",oldBookPageBean);
+        model.addAttribute("flag","old");
         return "jsps/oldBookExchange/list";
     }
     @RequestMapping("/add")
@@ -103,28 +106,11 @@ public class OldBookController {
         Attachments attachments = new Attachments();
         attachments.setBusiId(uuid.toString().substring(0,10));
         attachments.setBusiType("oldBookPic");
-
-        String originalFilename = file.getOriginalFilename();
-        String savePath = "/oldBookPic"+"/"+ System.currentTimeMillis();
-        String rPath="";
-        rPath=path+savePath;
-        attachments.setFileUrl(rPath);
-
-        int i = originalFilename.lastIndexOf(".");
-        String substring = originalFilename.substring(0, i - 1);
-        String fileType = originalFilename.substring(i);
-        attachments.setFileType(fileType);
-        attachments.setFileName(substring);
-        attachments.setFileSize(file.getSize());
-        attachments.setId(uuid.toString().substring(0,10));
-        attachments.setSaveName(UUID.randomUUID().toString());
-        attachments.setUserId(user.getUid());
-        oldBook.setImage_b(savePath+"/"+attachments.getSaveName());
-        oldBook.setImage_w(savePath+"/"+attachments.getSaveName());
         //读取文件内容
-        attachmentsService.insertAttachments(attachments,file,rPath);
+        attachmentsService.insertAttachments(attachments,file,user);
 
-
+        oldBook.setImage_b(attachments.getFileUrl());
+        oldBook.setImage_w(attachments.getFileUrl());
         //  FileInputStream fis=new FileInputStream(file.getInputStream());
         oldBook.setBid(uuid.toString().substring(0,10));
 

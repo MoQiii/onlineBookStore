@@ -27,12 +27,12 @@
   <body>
   <div class="divBookName">${book.bname }</div>
   <div>
-    <img align="top" src="<c:url value='http://localhost:8082/pic${book.image_w }'/>" class="img_image_w"/>
+    <img align="top" src="<c:url value='${book.image_w }'/>" class="img_image_w"/>
     <div class="divBookDesc">
 	    <ul>
 	    	<li>商品编号：${book.bid }</li>
 	    	<li>会员价：<span class="price_n">&yen;${book.currPrice }</span></li>
-	    	<li>原价：<span class="spanPrice">&yen;${book.originalPrice }</span></li>
+	    	<li>原价：<span class="spanPrice">&yen;${book.price }</span></li>
 	    </ul>
 		<hr class="hr1"/>
 		<table>

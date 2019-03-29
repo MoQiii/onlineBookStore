@@ -32,7 +32,7 @@
 <c:forEach items="${pb.beanList }" var="book">
  <li>
   <div class="inner">
-    <a class="pic" href="<c:url value='/adminbook/load?bid=${book.bid }'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
+    <a class="pic" href="<c:url value='/adminbook/load?bid=${book.bid }'/>"><img src="<c:url value='${book.image_b }'/>" border="0"/></a>
     <p class="price" >
 		<span class="price_n">&yen;${book.currPrice }</span>
 		<span class="price_r">&yen;${book.price }</span>

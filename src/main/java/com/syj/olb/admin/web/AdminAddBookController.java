@@ -1,5 +1,6 @@
 package com.syj.olb.admin.web;
 
+import com.syj.olb.admin.pojo.Admin;
 import com.syj.olb.attachments.pojo.Attachments;
 import com.syj.olb.attachments.service.AttachmentsService;
 import com.syj.olb.book.pojo.Book;
@@ -17,15 +18,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Controller
-@PropertySource("config/attachments.properties")
+
 @RequestMapping("/adminaddbook")
 public class AdminAddBookController {
     @Value("${attachment.filePath}")
-    private String path;
+    private String filePath;
+    @Value("${attachment.fileUrl}")
+    private String fileUrl;
     @Resource(name="categoryServiceImpl")
     private CategoryService categoryService;
     @Resource(name="AttachmentsServiceImpl")
@@ -37,12 +39,12 @@ public class AdminAddBookController {
      //   Book book = new Book();
         UUID uuid = UUID.randomUUID();
         book.setBid(uuid.toString().substring(0,12));
-        User user = new User();
-        Object object = request.getSession().getAttribute("sessionUser");
+        Admin admin = new Admin();
+        Object object = request.getSession().getAttribute("admin");
         if (object == null) {
             return "redirect:/user/loginToView";
         } else {
-            user = (User) object;
+            admin = (Admin) object;
         }
 
      //   BeanUtils.populate(book, req.getParameterMap());
@@ -55,25 +57,15 @@ public class AdminAddBookController {
         attachments.setBusiId(uuid.toString().substring(0, 10));
         attachments.setBusiType("oldBookPic");
 
-        String originalFilename = image_w.getOriginalFilename();
         String savePath = "/oldBookPic" + "/" + System.currentTimeMillis();
         String rPath="";
-        rPath=path+savePath;
-        attachments.setFileUrl(rPath);
-
-        int i = originalFilename.lastIndexOf(".");
-        String substring = originalFilename.substring(0, i - 1);
-        String fileType = originalFilename.substring(i);
-        attachments.setFileType(fileType);
-        attachments.setFileName(substring);
-        attachments.setFileSize(image_w.getSize());
-        attachments.setId(uuid.toString().substring(0, 10));
-        attachments.setSaveName(UUID.randomUUID().toString());
-        attachments.setUserId(user.getUid());
-        book.setImage_b(savePath + "/" + attachments.getSaveName());
-        book.setImage_w(savePath + "/" + attachments.getSaveName());
+        String rFileUrl="";
+        rPath=filePath+savePath;
+        rFileUrl=fileUrl+savePath;
+        book.setImage_b(attachments.getFileUrl());
+        book.setImage_w(attachments.getFileUrl());
         //读取文件内容
-        attachmentsService.insertAttachments(attachments, image_w, rPath);
+        attachmentsService.insertAttachmentsAdmin(attachments, image_w, rPath ,rFileUrl,admin);
 
         bookService.add(book);
         return "redirect:/user/loginToView";

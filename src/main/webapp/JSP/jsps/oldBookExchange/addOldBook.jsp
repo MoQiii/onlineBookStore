@@ -91,7 +91,7 @@ a {text-decoration: none;}
                                   </select>
                               </div>
                         </div>
-                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原价 : </span><input id="originalPrice" name="originalPrice" value=""></div>
+                      <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原价 : </span><input id="originalPrice" name="price" value=""></div>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现价 : </span><input id="currPrice" name="currPrice" value=""></div>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者 : </span><input id="author" name="author" value=""></div>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;出版社 : </span><input id="press" name="press" value=""></div>

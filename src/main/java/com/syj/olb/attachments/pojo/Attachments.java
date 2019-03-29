@@ -10,6 +10,7 @@ public class Attachments {
     private String fileName;
     private String fileType;
     private String fileUrl;
+    private String filePath;
     private String saveName;
     private Long  fileSize;
     private String userId;

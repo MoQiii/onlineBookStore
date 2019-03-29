@@ -29,12 +29,14 @@
 <c:forEach items="${pb.beanList }" var="book">
   <li>
   <div class="inner">
-    <a class="pic" href="<c:url value='/OldBook/load?bid=${book.bid }'/>"><img src="<c:url value='http://localhost:8082/pic${book.image_b }'/>" border="0"/></a>
+    <a class="pic" href="<c:url value='/OldBook/load?bid=${book.bid }'/>"><img src="<c:url value='${book.image_b }'/>" border="0"/></a>
     <p class="price">
 		<span class="price_n">&yen;${book.currPrice}</span>
-		<span class="price_r">&yen;${book.originalPrice }</span>
+		<span class="price_r">&yen;${book.price }</span>
+		<c:if test="${flag=='old'}">
 		<span>&nbsp&nbsp&nbsp&nbsp<input type="button" value="下架" onclick="deleteOldBook('${book.bid}')"/></span>
 		<%--(<span class="price_s">${book.discount }折</span>)--%>
+		</c:if>
 	</p>
 	<p><a id="bookname" title="${book.bname }" href="<c:url value='/OldBook/load?bid=${book.bid }'/>">${book.bname }</a></p>
 	<%-- url标签会自动对参数进行url编码 --%>
