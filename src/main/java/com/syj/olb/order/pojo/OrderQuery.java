@@ -1,6 +1,6 @@
 package com.syj.olb.order.pojo;
 
-import com.syj.olb.comon.BaseQuery;
+import com.syj.olb.common.BaseQuery;
 import com.syj.olb.user.pojo.User;
 
 import java.util.List;

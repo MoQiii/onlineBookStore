@@ -3,10 +3,11 @@ package com.syj.olb.category.pojo;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class Category {
+public class Category implements Serializable {
     private String cid;// 主键
     private String cname;// 分类名称
     private Category parent;// 父分类

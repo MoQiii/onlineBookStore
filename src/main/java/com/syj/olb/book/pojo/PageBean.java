@@ -1,8 +1,9 @@
 package com.syj.olb.book.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PageBean <T>{
+public class PageBean <T> implements Serializable {
     private int pc;//当前页码
     private int tr;//总记录数
     private int ps;//每页记录数

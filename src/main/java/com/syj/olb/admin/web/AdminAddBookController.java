@@ -24,10 +24,10 @@ import java.util.UUID;
 
 @RequestMapping("/adminaddbook")
 public class AdminAddBookController {
-    @Value("${attachment.filePath}")
+    /*@Value("${attachment.filePath}")
     private String filePath;
     @Value("${attachment.fileUrl}")
-    private String fileUrl;
+    private String fileUrl;*/
     @Resource(name="categoryServiceImpl")
     private CategoryService categoryService;
     @Resource(name="AttachmentsServiceImpl")
@@ -58,15 +58,15 @@ public class AdminAddBookController {
         attachments.setBusiType("oldBookPic");
 
         String savePath = "/oldBookPic" + "/" + System.currentTimeMillis();
-        String rPath="";
+        /*String rPath="";
         String rFileUrl="";
         rPath=filePath+savePath;
-        rFileUrl=fileUrl+savePath;
+        rFileUrl=fileUrl+savePath;*/
+
+        //读取文件内容
+        attachmentsService.insertAttachmentsAdmin(attachments, image_w,admin);
         book.setImage_b(attachments.getFileUrl());
         book.setImage_w(attachments.getFileUrl());
-        //读取文件内容
-        attachmentsService.insertAttachmentsAdmin(attachments, image_w, rPath ,rFileUrl,admin);
-
         bookService.add(book);
         return "redirect:/user/loginToView";
     }

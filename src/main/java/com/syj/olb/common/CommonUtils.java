@@ -1,4 +1,4 @@
-package com.syj.olb.comon;
+package com.syj.olb.common;
 
 import java.util.UUID;
 

@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Setter
 @Getter
 @ToString
-public class Book {
+public class Book implements Serializable {
 	private String bid;//主键
 	private String bname;//图名
 	private String author;//作者

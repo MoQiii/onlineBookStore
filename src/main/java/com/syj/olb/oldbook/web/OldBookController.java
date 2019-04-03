@@ -36,15 +36,15 @@ import java.util.UUID;
 @RequestMapping("/OldBook")
 @Controller
 //@ConfigurationProperties(prefix = "attachment")
-@PropertySource("config/attachments.properties")
+//@PropertySource("config/attachments.properties")
 public class OldBookController {
 
     @Resource(name="oldBookServiceImpl")
     private OldBookService bookService;
-    @Value("${attachment.filePath}")
+    /*@Value("${attachment.filePath}")
     private String filePath;
     @Value("${attachment.fileUrl}")
-    private String fileUrl;
+    private String fileUrl;*/
     @Resource(name="categoryServiceImpl")
     private CategoryService categoryService;
     @Resource(name="AttachmentsServiceImpl")
@@ -162,8 +162,7 @@ public class OldBookController {
      * @throws IOException
      */
     @RequestMapping("/load")
-    public String load(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String load(HttpServletRequest req, HttpServletResponse resp){
         String bid = req.getParameter("bid");//获取链接的参数bid
         OldBook book = bookService.load(bid);//通过bid得到book对象
         req.setAttribute("book", book);//保存到req中

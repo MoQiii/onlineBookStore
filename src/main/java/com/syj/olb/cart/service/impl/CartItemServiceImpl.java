@@ -3,7 +3,7 @@ package com.syj.olb.cart.service.impl;
 import com.syj.olb.cart.dao.CartItemDao;
 import com.syj.olb.cart.domain.CartItem;
 import com.syj.olb.cart.service.CartItemService;
-import com.syj.olb.comon.CommonUtils;
+import com.syj.olb.common.CommonUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package com.syj.olb.user.web;
 
-import com.syj.olb.comon.VerifyCode;
+import com.syj.olb.common.VerifyCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -6,6 +6,7 @@ import com.syj.olb.attachments.pojo.Attachments;
 import com.syj.olb.attachments.service.AttachmentsService;
 import com.syj.olb.user.pojo.User;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import java.io.*;
 import java.util.UUID;
 
 @Service("AttachmentsServiceImpl")
+@ConfigurationProperties(prefix = "attachment")
 @PropertySource("config/attachments.properties")
 public class AttachmentsServiceImpl implements AttachmentsService {
     @Value("${attachment.filePath}")
@@ -32,7 +34,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
         String rPath="";
         String rFileUrl="";
         rPath=filePath+savePath;//F:/olbPic/oldBookPic+"/"+ System.currentTimeMillis()/;
-        rFileUrl=fileUrl+savePath;//http:localhost:8082/pic/oldBookPic+"/"+ System.currentTimeMillis()/;
+        rFileUrl=fileUrl+savePath;//http:localhost:8082/olbPic/oldBookPic+"/"+ System.currentTimeMillis()/;
 
         String originalFilename = file.getOriginalFilename();
         attachments.setFileUrl(rFileUrl+originalFilename);

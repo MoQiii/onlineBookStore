@@ -1,6 +1,6 @@
 package com.syj.olb.register;
 
-import com.syj.olb.comon.VerifyCode;
+import com.syj.olb.common.VerifyCode;
 import com.syj.olb.login.pojo.OlbUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.syj.olb.comon;
+package com.syj.olb.common;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.context.annotation.Configuration;

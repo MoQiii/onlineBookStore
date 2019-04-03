@@ -1,6 +1,6 @@
 package com.syj.olb.login.pojo;
 
-import com.syj.olb.comon.BaseModel;
+import com.syj.olb.common.BaseModel;
 
 public class OlbUser extends BaseModel {
     private String userName;

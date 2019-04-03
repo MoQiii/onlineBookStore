@@ -4,6 +4,8 @@ import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.pojo.BookQuery;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.book.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +21,8 @@ public class BookController {
     @Resource(name="bookServiceImpl")
     private BookService bookService;
 
-
+    @Autowired
+    RedisTemplate<String,String> redisTemplate;
     /**
      * 获取当前页码
      * @param req
@@ -64,10 +67,17 @@ public class BookController {
      * @throws IOException
      */
     @RequestMapping("/load")
-    public String load(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String load(HttpServletRequest req, HttpServletResponse resp){
+        if(redisTemplate==null){
+            System.out.println("is null");
+        }
+        else{
+            redisTemplate.opsForValue().set("1","2");
+            System.out.println( redisTemplate.opsForValue().get("1"));
+        }
         String bid = req.getParameter("bid");//获取链接的参数bid
         Book book = bookService.load(bid);//通过bid得到book对象
+
         req.setAttribute("book", book);//保存到req中
         return "jsps/book/desc";//转发到desc.jsp
     }

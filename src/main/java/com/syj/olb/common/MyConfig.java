@@ -1,13 +1,11 @@
-package com.syj.olb.comon;
+package com.syj.olb.common;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;

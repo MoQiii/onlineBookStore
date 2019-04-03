@@ -5,8 +5,11 @@ import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.pojo.BookQuery;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.book.service.BookService;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -56,6 +59,8 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
+  //  @Cacheable(value="cacheTest",key = "#result.bid")
+    @Cacheable(value="cacheTest")
     public Book load(String bid) {
         Book book = bookDao.findByBid(bid);
         return book;
@@ -80,6 +85,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
+    @Cacheable(value = "categroyCache",key = "#bookQuery.cid")
     public PageBean<Book> findByCategory(BookQuery bookQuery) {
         PageBean<Book> pb = bookDao.findByCategory(bookQuery);
         return pb;
