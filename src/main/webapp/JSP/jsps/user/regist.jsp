@@ -19,6 +19,7 @@
 
 	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/JSP/jsps/js/user/regist.js'/>"></script>
+    <script src="<c:url value='/js/common.js'/>"></script>
   </head>
   
   <body>
@@ -28,7 +29,6 @@
   </div>
   <div id="divBody">
 <form action="<c:url value='/user/regist'/>" method="post" id="registForm">
-	<input type="hidden" name="method" value="regist"/>  
     <table id="tableForm">
       <tr>
         <td class="tdText">用户名：</td>
@@ -81,13 +81,13 @@
           <div id="divVerifyCode"><img id="imgVerifyCode" src="<c:url value='/register/verifyCode'/>"/></div>
         </td>
         <td>
-          <label><a href="javascript:_hyz()">换一张</a></label>
+          <label> <a id="averifyCode" href="javascript:picChangeR()">换张图</a></label>
         </td>
       </tr>
       <tr>
         <td></td>
         <td>
-          <input type="image" src="<c:url value='/images/regist1.jpg'/>" id="submitBtn"/>
+          <input type="button" id="submitBtn1" onclick="validata()" style="width: 245px;height:37px;background-image: url('http://localhost:8080/images/regist1.jpg');cursor:pointer" />
         </td>
         <td>
           <label></label>

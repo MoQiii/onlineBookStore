@@ -25,10 +25,10 @@
   <body>
 
 <ul>
-<c:forEach items="${pb.beanList }" var="book">
+<c:forEach items="${pb.beanList }" var="book">+
   <li>
   <div class="inner">
-    <a class="pic" href="<c:url value='/book/load?bid=${book.bid }'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
+    <a class="pic" href="<c:url value='/book/load?bid=${book.bid }'/>"><img src="<c:url value='${book.image_b }'/>" border="0"/></a>
     <p class="price">
 		<span class="price_n">&yen;${book.currPrice }</span>
 		<span class="price_r">&yen;${book.price }</span>
@@ -47,7 +47,7 @@
 	</p>
 	<p class="publishing">
 		<%--<span>出 版 社：</span><a href="${pressUrl }">${book.press }</a>--%>
-			<span>出 版 社：>${book.press }</span>
+			<span>出 版 社：${book.press }</span>
 	</p>
 	<p class="publishing_time"><span>出版时间：</span>${book.publishtime }</p>
   </div>
@@ -56,11 +56,11 @@
 
 </ul>
 
-<div style="float:left; width: 100%; text-align: center;">
+<%--<div style="float:left; width: 100%; text-align: center;">
 	<hr/>
 	<br/>
 	<%@include file="/JSP/jsps/pager/pager.jsp" %>
-</div>
+</div>--%>
 
   </body>
  

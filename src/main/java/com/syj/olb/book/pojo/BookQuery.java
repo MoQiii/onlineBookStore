@@ -29,4 +29,5 @@ public class BookQuery {
     private String cid;
     private int pc;
     private int orderBy;
+    private String status;
 }

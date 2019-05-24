@@ -2,16 +2,16 @@ package com.syj.olb.book.pojo;
 
 
 import com.syj.olb.category.pojo.Category;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
 
-@Setter
-@Getter
-@ToString
+@Data
 public class Book implements Serializable {
+	private static final long serialVersionUID = 8841433872811285796L;
 	private String bid;//主键
 	private String bname;//图名
 	private String author;//作者
@@ -31,4 +31,6 @@ public class Book implements Serializable {
 	private String image_b;//小图路径
 	private String cid;
 	private int orderBy;
+	private String status;
+	private String user_id;
 }

@@ -26,4 +26,5 @@ public class OldBookQuery {
     private String cid;
     private int pc;
     private int orderBy;
+    private String status;
 }

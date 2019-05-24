@@ -118,6 +118,7 @@ $(function() {
 
 // 请求服务器，修改数量。
 function sendUpdateQuantity(id, quantity,price) {
+    var subtotal="";
 	$.ajax({
 		async:false,
 		cache:false,
@@ -129,7 +130,7 @@ function sendUpdateQuantity(id, quantity,price) {
             //1. 修改数量
 			$("#" + id + "Quantity").val(result.quantity);
 			//2. 修改小计
-			$("#" + id + "Subtotal").text(result.subtotal);
+			$("#" + id + "Subtotal").text(result.subTotal);
 			//3. 重新计算总计
 			showTotal();
 		},
@@ -284,7 +285,7 @@ function sleep(n) { //n表示的毫秒数
 			<input value="${cartItem.cartItemId }" type="checkbox" id="checkboxBtn" name="checkboxBtn" checked="true"/>
 		</td>
 		<td align="left" width="70px">
-			<a class="linkImage" href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><img border="0" width="54" align="top" src="<c:url value='/${cartItem.book.image_b }'/>"/></a>
+			<a class="linkImage" href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><img border="0" width="54" align="top" src="<c:url value='${cartItem.book.image_b }'/>"/></a>
 		</td>
 		<td align="left" width="400px">
 		    <a href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><span>${cartItem.book.bname }</span></a>

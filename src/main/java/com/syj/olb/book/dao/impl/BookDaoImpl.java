@@ -167,7 +167,6 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public Book findByBid(String bid) {
-        Book book = bookMapper.findByBid(bid);
-        return book;
+        return bookMapper.findByBid(bid);
     }
 }

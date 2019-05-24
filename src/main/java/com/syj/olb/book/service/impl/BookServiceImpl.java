@@ -48,7 +48,6 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public int findBookCountByCategory(String cid) {
-
         return bookDao.findBookCountByCategory(cid);
     }
 
@@ -62,13 +61,11 @@ public class BookServiceImpl implements BookService {
   //  @Cacheable(value="cacheTest",key = "#result.bid")
     @Cacheable(value="cacheTest")
     public Book load(String bid) {
-        Book book = bookDao.findByBid(bid);
-        return book;
+        return bookDao.findByBid(bid);
     }
 
     /**
      * 加载图书
-     *
      * @param bids
      * @return
      */
@@ -85,7 +82,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
-    @Cacheable(value = "categroyCache",key = "#bookQuery.cid")
+  //  @Cacheable(value = "categroyCache",key = "#bookQuery.cid")
     public PageBean<Book> findByCategory(BookQuery bookQuery) {
         PageBean<Book> pb = bookDao.findByCategory(bookQuery);
         return pb;

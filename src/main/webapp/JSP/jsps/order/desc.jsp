@@ -55,7 +55,7 @@
 						<tr style="padding-top: 20px; padding-bottom: 20px;">
 							<td class="td" width="400px">
 								<div class="bookname">
-								  <img align="middle" width="70" src="<c:url value='/${item.image_b }'/>"/>
+								  <img align="middle" width="70" src="<c:url value='${item.image_b }'/>"/>
 								  <a href="<c:url value='/book/load?bid=${item.book.bid }'/>">${item.book.bname }</a>
 								</div>
 							</td>

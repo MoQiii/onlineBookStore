@@ -13,7 +13,7 @@ public interface BookMapper {
     public List<Book> findByCriteria(BookQuery bookQuery);
 //    @Select("select count(*) from t_book where ")
     public int count(BookQuery bookQuery);
-    @Select("SELECT * FROM t_book b, t_category c WHERE b.cid=c.cid AND b.bid=#{bid}")
+    @Select("SELECT b.* FROM t_book b, t_category c WHERE b.cid=c.cid AND b.bid=#{bid}")
     public Book findByBid(@Param("bid") String bid);
 
     public List<Book> findByBids(List<String> bids);

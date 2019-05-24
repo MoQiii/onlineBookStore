@@ -58,11 +58,11 @@
 
 </ul>
 
-<div style="float:left; width: 100%; text-align: center;">
+<%--<div style="float:left; width: 100%; text-align: center;">
 	<hr/>
 	<br/>
 	<%@include file="/JSP/jsps/pager/pager.jsp" %>
-</div>
+</div>--%>
 
   </body>
  

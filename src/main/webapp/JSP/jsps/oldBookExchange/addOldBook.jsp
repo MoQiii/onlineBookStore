@@ -47,7 +47,6 @@ a {text-decoration: none;}
                   success:function () {
                       alert("上架成功！");
                       window.open(path+'/OldBook/welcome',"_parent");
-
                   },
                   error:function () {
                       alert("上架失败，请稍后重试！");
@@ -74,6 +73,7 @@ a {text-decoration: none;}
               </div>
               <div class="modal-body">
                   <form id="OlbForm" action="/OldBook/add" enctype="multipart/form-data" method="post">
+                      <input type="hidden" name="status" id="status" value="-1"/>
                       <div style="margin-bottom: 8px"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称 : </span><input id="bname" name="bname" value=""></div>
                       <div id="category">
                           <div style="margin-bottom: 8px"><span>一级种类 : </span>

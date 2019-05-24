@@ -109,7 +109,7 @@ function editForm() {
     <br/>
   <div id="show">
     <div class="sm">${book.bname }</div>
-    <img align="top" src="<c:url value='/${book.image_w }'/>" class="tp"/>
+    <img align="top" src="<c:url value='${book.image_w }'/>" class="tp"/>
     <div id="book" style="float:left;">
 	    <ul>
 	    	<li>商品编号：${book.bid }</li>
@@ -151,7 +151,7 @@ function editForm() {
    <form action="" method="post" id="form">
     <%--<input type="hidden" name="method" id="method"/>--%>
    	<input type="hidden" name="bid" value="${book.bid }"/>
-    <img align="top" src="<c:url value='/${book.image_w }'/>" class="tp"/>
+    <img align="top" src="<c:url value='${book.image_w }'/>" class="tp"/>
     <div style="float:left;">
 	    <ul>
 	    	<li>商品编号：${book.bid }</li>

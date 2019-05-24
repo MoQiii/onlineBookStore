@@ -101,20 +101,33 @@ public class OrderController {
         /*
          * 1. 准备13个参数
          */
-        String p0_Cmd = "Buy";//业务类型，固定值Buy
-        String p1_MerId = props.getProperty("p1_MerId");//商号编码，在易宝的唯一标识
-        String p2_Order = req.getParameter("oid");//订单编码
-        String p3_Amt = "0.01";//支付金额
-        String p4_Cur = "CNY";//交易币种，固定值CNY
-        String p5_Pid = "";//商品名称
-        String p6_Pcat = "";//商品种类
-        String p7_Pdesc = "";//商品描述
-        String p8_Url = props.getProperty("p8_Url");//在支付成功后，易宝会访问这个地址。
-        String p9_SAF = "";//送货地址
-        String pa_MP = "";//扩展信息
-        String pd_FrpId = req.getParameter("yh");//支付通道
-        String pr_NeedResponse = "1";//应答机制，固定值1
-
+        //业务类型，固定值Buy
+        String p0_Cmd = "Buy";
+        //商号编码，在易宝的唯一标识
+        String p1_MerId = props.getProperty("p1_MerId");
+        //订单编码
+        String p2_Order = req.getParameter("oid");
+        orderService.updateStatus(p2_Order, 2);
+        //支付金额
+        String p3_Amt = "0.01";
+        //交易币种，固定值CNY
+        String p4_Cur = "CNY";
+        //商品名称
+        String p5_Pid = "";
+        //商品种类
+        String p6_Pcat = "";
+        //商品描述
+        String p7_Pdesc = "";
+        //在支付成功后，易宝会访问这个地址。
+        String p8_Url = props.getProperty("p8_Url");
+        //送货地址
+        String p9_SAF = "";
+        //扩展信息
+        String pa_MP = "";
+        //支付通道
+        String pd_FrpId = req.getParameter("yh");
+        //应答机制，固定值1
+        String pr_NeedResponse = "1";
         /*
          * 2. 计算hmac
          * 需要13个参数
@@ -145,7 +158,7 @@ public class OrderController {
         sb.append("&").append("pr_NeedResponse=").append(pr_NeedResponse);
         sb.append("&").append("hmac=").append(hmac);
         //重定向到易宝网关
-        resp.sendRedirect(sb.toString());
+      //  resp.sendRedirect(sb.toString());
         return null;
     }
 
@@ -375,12 +388,9 @@ public class OrderController {
      * @param req
      * @param resp
      * @return
-     * @throws ServletException
-     * @throws IOException
      */
     @RequestMapping("/myOrders")
-    public String myOrders(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String myOrders(HttpServletRequest req, HttpServletResponse resp){
         /*
          * 1. 得到pc：如果页面传递，使用页面的，如果没传，pc=1
          */

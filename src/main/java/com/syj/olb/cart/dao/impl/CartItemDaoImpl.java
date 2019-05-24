@@ -70,8 +70,6 @@ public class CartItemDaoImpl implements CartItemDao {
     /**
      * 修改指定条目的数量
      *
-     * @param cartItemId
-     * @param quantity
      */
     @Override
     public void updateQuantity(CartItem cartItem) {

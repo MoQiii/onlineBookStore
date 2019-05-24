@@ -58,9 +58,10 @@ public class CartItemServiceImpl implements CartItemService {
         else {//如果原来有这个条目，修改数量
             // 使用原有数量和新条目数量之各，来做为新的数量
             int quantity = cartItem.getQuantity() + _cartItem.getQuantity();
-            cartItem.setSubTotal(new BigDecimal(quantity*cartItem.getPrice().intValue()));
+            _cartItem.setSubTotal(new BigDecimal(quantity*cartItem.getPrice().intValue()));
+            _cartItem.setQuantity(quantity);
             // 修改这个老条目的数量
-            cartItemDao.updateQuantity(cartItem);
+            cartItemDao.updateQuantity(_cartItem);
         }
     }
 

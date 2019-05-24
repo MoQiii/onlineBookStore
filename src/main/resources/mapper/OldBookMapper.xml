@@ -22,17 +22,37 @@
        <result property="cid" column="cid"/>
        <result property="orderBy" column="orderBy"/>
        <result property="uid" column="user_id"/>
-      <!-- <association property="category" javaType="Category">
-           <id property="cid" column="cid"/>
-           <result property="cname" column="cname"/>
-           <result property="parent" column="pid"/>
-           <result property="desc" column="desc"/>
-           <result property="orderBy" column="orderBy"/>
-       </association>-->
     </resultMap>
 
-    <select id="findByCriteria" parameterType="oldBookQuery" resultMap="oldBook">
-        select * from  t_oldbook where cid=#{cid}
+    <resultMap id="book" type="com.syj.olb.book.pojo.Book">
+        <id property="bid" column="bid" />
+        <result property="bname" column="bname"/>
+        <result property="author" column="author"/>
+        <result property="price" column="price"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="currPrice" column="currPrice"/>
+        <result property="discount" column="discount"/>
+        <result property="press" column="press"/>
+        <result property="publishtime" column="publishtime"/>
+        <result property="edition" column="edition"/>
+        <result property="pageNum" column="pageNum"/>
+        <result property="wordNum" column="wordNum"/>
+        <result property="printtime" column="printtime"/>
+        <result property="booksize" column="booksize"/>
+        <result property="paper" column="paper"/>
+        <result property="image_w" column="image_w"/>
+        <result property="image_b" column="image_b"/>
+        <result property="cid" column="cid"/>
+        <result property="orderBy" column="orderBy"/>
+        <result property="user_d" column="user_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="findByCriteria" parameterType="oldBookQuery" resultMap="book">
+        select * from  t_book where cid=#{cid}
+        <if test="status !='' and status !=null">
+            and status=#{status}
+        </if>
     </select>
     <select id="count" parameterType="oldBookQuery" resultType="int">
         select count(*) from  t_oldbook where cid=#{cid}

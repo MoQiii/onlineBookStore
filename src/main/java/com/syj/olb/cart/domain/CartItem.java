@@ -18,5 +18,6 @@ public class CartItem {
 	private String uid;// 所属用户
 	private BigDecimal price;// 所属用户
 	private BigDecimal subTotal;
+	private String subTotalStr;
 	private int orderBy;
 }

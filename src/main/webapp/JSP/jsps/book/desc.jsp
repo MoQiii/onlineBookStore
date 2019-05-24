@@ -27,7 +27,7 @@
   <body>
   <div class="divBookName">${book.bname }</div>
   <div>
-    <img align="top" src="<c:url value='/${book.image_w }'/>" class="img_image_w"/>
+    <img align="top" src="<c:url value='${book.image_w }'/>" class="img_image_w"/>
     <div class="divBookDesc">
 	    <ul>
 	    	<li>商品编号：${book.bid }</li>

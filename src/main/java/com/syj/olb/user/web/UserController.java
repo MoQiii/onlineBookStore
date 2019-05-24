@@ -1,6 +1,9 @@
 package com.syj.olb.user.web;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.syj.olb.user.pojo.User;
 import com.syj.olb.user.service.UserService;
 import org.omg.CORBA.UserException;
@@ -108,8 +111,11 @@ public class UserController {
         /*
          * 4. 发送给客户端
          */
-        resp.getWriter().print(b);
-        return null;
+        Map<String, String> map=new HashMap<>();
+        map.put("success",""+b);
+
+        //  resp.getWriter().print(b);
+        return JSON.toJSONString(map);
     }
     @RequestMapping("/registToView")
     public String registToView(){
@@ -311,37 +317,13 @@ public class UserController {
      */
     @RequestMapping("/login")
     public String login(HttpServletRequest req, HttpServletResponse resp,User formUser)
-            throws ServletException, IOException {
-        /*
-         * 1. 封装表单数据到User
-         * 2. 校验表单数据
-         * 3. 使用service查询，得到User
-         * 4. 查看用户是否存在，如果不存在：
-         *   * 保存错误信息：用户名或密码错误
-         *   * 保存用户数据：为了回显
-         *   * 转发到login.jsp
-         * 5. 如果存在，查看状态，如果状态为false：
-         *   * 保存错误信息：您没有激活
-         *   * 保存表单数据：为了回显
-         *   * 转发到login.jsp
-         * 6. 登录成功：
-         * 　　* 保存当前查询出的user到session中
-         *   * 保存当前用户的名称到cookie中，注意中文需要编码处理。
-         */
-        /*
-         * 1. 封装表单数据到user
-         */
-   //     User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
-        /*
-         * 2. 校验
-         */
+            throws IOException {
         Map<String,String> errors = validateLogin(formUser, req.getSession());
         if(errors.size() > 0) {
             req.setAttribute("form", formUser);
             req.setAttribute("errors", errors);
             return "jsps/user/login";
         }
-
         /*
          * 3. 调用userService#login()方法
          */

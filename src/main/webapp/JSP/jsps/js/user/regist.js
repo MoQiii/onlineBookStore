@@ -11,10 +11,10 @@ $(function() {
 	 */
 	$("#submitBtn").hover(
 		function() {
-			$("#submitBtn").attr("src", "/images/regist2.jpg");
+			$("#submitBtn").attr("background-image", "http://localhost:8080/images/regist2.jpg");
 		},
 		function() {
-			$("#submitBtn").attr("src", "/images/regist1.jpg");
+			$("#submitBtn").attr("background-image", "http://localhost:8080/images/regist1.jpg");
 		}
 	);
 	
@@ -60,7 +60,13 @@ $(function() {
 		return bool;
 	});
 });
-
+function validata() {
+    if (validateLoginname() && validateLoginpass() && validateReloginpass() && validateEmail()) {
+        if (validateVerifyCode()) {
+            $("#registForm").submit();
+        }
+    }
+}
 /*
  * 登录名校验方法
  */
@@ -97,7 +103,7 @@ function validateLoginname() {
 	 * 3. 是否注册校验
 	 */
 	$.ajax({
-		url:"/user/ajaxValidateLoginname",//要请求的servlet
+		url:"http://localhost:8080/user/ajaxValidateLoginname",//要请求的servlet
 		data:{ loginname:value},//给服务器的参数
 		type:"POST",
 		dataType:"json",
@@ -220,7 +226,7 @@ function validateEmail() {
 	 * 3. 是否注册校验
 	 */
 	$.ajax({
-		url:"/user/ajaxValidateEmail",//要请求的servlet
+		url:"http://localhost:8080/user/ajaxValidateEmail",//要请求的servlet
 		data:{ email:value},//给服务器的参数
 		type:"POST",
 		dataType:"json",
@@ -273,7 +279,7 @@ function validateVerifyCode() {
 	 * 3. 是否正确
 	 */
 	$.ajax({
-		url:"/user/ajaxValidateVerifyCode",//要请求的servlet
+		url:"http://localhost:8080/user/ajaxValidateVerifyCode",//要请求的servlet
 		data:{ verifyCode:value},//给服务器的参数
 		type:"POST",
 		dataType:"json",
@@ -305,11 +311,11 @@ function showError(ele) {
 /*
  * 换一张验证码
  */
-function _hyz() {
-	/*
+/*function _hyz() {
+	/!*
 	 * 1. 获取<img>元素
 	 * 2. 重新设置它的src
 	 * 3. 使用毫秒来添加参数
-	 */
+	 *!/
 	$("#imgVerifyCode").attr("src", "/VerifyCodeServlet?a=" + new Date().getTime());
-}
+}*/

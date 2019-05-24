@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
          * 1. 数据的补齐
          */
         user.setUid(uuid());
-        user.setStatus(false);
+        user.setStatus(true);
         user.setActivationCode(uuid() + uuid());
         /*
          * 2. 向数据库插入

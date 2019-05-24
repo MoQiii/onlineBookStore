@@ -21,7 +21,7 @@ public class OldBookServiceImpl implements OldBookService {
     public OldBookDao bookDao;
 
     @Override
-    public List<OldBook> oldBookList(String uid) {
+    public List<Book> oldBookList(String uid) {
         return bookDao.oldBookList(uid);
     }
 
@@ -63,8 +63,8 @@ public class OldBookServiceImpl implements OldBookService {
      * @return
      */
     @Override
-    public OldBook load(String bid) {
-        OldBook book = bookDao.findByBid(bid);
+    public Book load(String bid) {
+        Book book = bookDao.findByBid(bid);
         return book;
     }
 
@@ -87,8 +87,8 @@ public class OldBookServiceImpl implements OldBookService {
      * @return
      */
     @Override
-    public PageBean<OldBook> findByCategory(OldBookQuery bookQuery) {
-        PageBean<OldBook> pb = bookDao.findByCategory(bookQuery);
+    public PageBean<Book> findByCategory(OldBookQuery bookQuery) {
+        PageBean<Book> pb = bookDao.findByCategory(bookQuery);
         return pb;
     }
 

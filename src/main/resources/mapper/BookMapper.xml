@@ -20,6 +20,7 @@
        <result property="image_b" column="image_b"/>
        <result property="cid" column="cid"/>
        <result property="orderBy" column="orderBy"/>
+       <result property="status" column="status"/>
       <!-- <association property="category" javaType="Category">
            <id property="cid" column="cid"/>
            <result property="cname" column="cname"/>
@@ -36,6 +37,9 @@
     </select>-->
     <select id="findByCriteria" parameterType="bookQuery" resultMap="book">
         select * from  t_book where cid=#{cid}
+        <if test="status !='' and status !=null">
+            and status=#{status}
+        </if>
     </select>
     <select id="count" parameterType="bookQuery" resultType="int">
         select count(*) from  t_book where cid=#{cid}

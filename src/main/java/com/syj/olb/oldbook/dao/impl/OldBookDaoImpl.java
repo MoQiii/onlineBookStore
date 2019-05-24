@@ -17,7 +17,7 @@ public class OldBookDaoImpl implements OldBookDao {
     public OldBookMapper oldBookMapper;
 
     @Override
-    public List<OldBook> oldBookList(String uid) {
+    public List<Book> oldBookList(String uid) {
 
         return oldBookMapper.oldBookList(uid);
     }
@@ -60,7 +60,7 @@ public class OldBookDaoImpl implements OldBookDao {
      * @return
      */
     @Override
-    public OldBook load(String bid) {
+    public Book load(String bid) {
         return null;
     }
 
@@ -83,10 +83,10 @@ public class OldBookDaoImpl implements OldBookDao {
      * @return
      */
     @Override
-    public PageBean<OldBook> findByCategory(OldBookQuery bookQuery) {
+    public PageBean<Book> findByCategory(OldBookQuery bookQuery) {
         int count = oldBookMapper.count(bookQuery);
-        List<OldBook> byCriteria = oldBookMapper.findByCriteria(bookQuery);
-        PageBean<OldBook> pb = new PageBean<OldBook>();
+        List<Book> byCriteria = oldBookMapper.findByCriteria(bookQuery);
+        PageBean<Book> pb = new PageBean<Book>();
         pb.setBeanList(byCriteria);
         return pb;
     }
@@ -173,8 +173,8 @@ public class OldBookDaoImpl implements OldBookDao {
      * @return
      */
     @Override
-    public OldBook findByBid(String bid) {
-        OldBook book = oldBookMapper.findByBid(bid);
+    public Book findByBid(String bid) {
+        Book book = oldBookMapper.findByBid(bid);
         return book;
     }
 }

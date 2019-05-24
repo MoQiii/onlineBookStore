@@ -2,13 +2,8 @@ package com.syj.olb.oldbook.pojo;
 
 
 import com.syj.olb.category.pojo.Category;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Setter
-@Getter
-@ToString
+import lombok.Data;
+@Data
 public class OldBook {
 	private String bid;//主键
 	private String bname;//图名
@@ -31,4 +26,5 @@ public class OldBook {
 	private String cid;
 	private String uid;
 	private int orderBy;
+	private String status;
 }

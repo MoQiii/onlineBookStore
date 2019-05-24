@@ -48,13 +48,9 @@
 
   <c:forEach items="${order.orderItemList }" var="orderItem">
 	<a class="link2" href="<c:url value='/book/load?bid=${orderItem.book.bid }'/>">
-	    <img border="0" width="70" src="<c:url value='/${orderItem.image_b }'/>"/>
+	    <img border="0" width="70" src="<c:url value='${orderItem.image_b }'/>"/>
 	</a>
   </c:forEach>
-	
-
-
-
 			</td>
 			<td width="115px">
 				<span class="price_t">&yen;${order.total }</span>
@@ -86,7 +82,7 @@
 
 	</table>
 	<br/>
-	<%@include file="/JSP/jsps/pager/pager.jsp" %>
+	<%--<%@include file="/JSP/jsps/pager/pager.jsp" %>--%>
 </div>
   </body>
 </html>

@@ -9,7 +9,7 @@ import com.syj.olb.oldbook.pojo.OldBookQuery;
 import java.util.List;
 
 public interface OldBookService {
-    public List<OldBook> oldBookList( String uid);
+    public List<Book> oldBookList( String uid);
 
     /**
      * 删除图书
@@ -32,7 +32,7 @@ public interface OldBookService {
      * @param bid
      * @return
      */
-    public OldBook load(String bid);
+    public Book load(String bid);
     /**
      * 加载图书
      * @param bids
@@ -43,7 +43,7 @@ public interface OldBookService {
      * 按分类查
      * @return
      */
-    public PageBean<OldBook> findByCategory(OldBookQuery bookQuery);
+    public PageBean<Book> findByCategory(OldBookQuery bookQuery);
     /**
      * 按书名查
      * @param bname

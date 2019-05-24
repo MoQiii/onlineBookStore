@@ -36,7 +36,7 @@
   </head>
   
   <body>
-<h1 style="text-align: center;">网上书城系统</h1>
+<h1 style="text-align: center;">旧书换购系统</h1>
 <div style="font-size: 10pt; line-height: 10px;">
 
 <%-- 根据用户是否登录，显示不同的链接 --%>

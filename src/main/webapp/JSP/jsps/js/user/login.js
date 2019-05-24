@@ -4,10 +4,10 @@ $(function() {
 	 */
 	$("#submit").hover(
 		function() {
-			$("#submit").attr("src", "/images/login2.jpg");
+			$("#submit").attr("background-image", "/images/login2.jpg");
 		},
 		function() {
-			$("#submit").attr("src", "/images/login1.jpg");
+			$("#submit").attr("background-image", "/images/login1.jpg");
 		}
 	);
 	
@@ -42,7 +42,30 @@ $(function() {
 		invokeValidateFunction(inputName);
 	})
 });
-
+function validata(){
+	if(validateLoginname() && validateLoginpass()){
+        if(validateVerifyCode()){
+        	$("#loginForm1").submit();
+		}
+	}
+   /* $.ajax({
+        url:"http://localhost:8080/user/ajaxValidateVerifyCode",
+        type:"POST",
+        dataType:"json",
+        data:{verifyCode:$("#iverifyCode").val()},
+        success:function (result) {
+            if(result.success=='true'){
+                $("#loginForm").submit();
+            }
+            else{
+                alert("验证码输入错误，请重新输入");
+            }
+        },
+        error:function () {
+            alert("error");
+        }
+    });*/
+}
 /*
  * 输入input名称，调用对应的validate方法。
  * 例如input名称为：loginname，那么调用validateLoginname()方法。
@@ -50,7 +73,9 @@ $(function() {
 function invokeValidateFunction(inputName) {
 	inputName = inputName.substring(0, 1).toUpperCase() + inputName.substring(1);
 	var functionName = "validate" + inputName;
-	return eval(functionName + "()");	
+	if(functionName!='validateVerifyCode'){
+        return eval(functionName + "()");
+    }
 }
 
 /*
@@ -113,9 +138,9 @@ function validateVerifyCode() {
 			type: "POST",
 			dataType: "json",
 			data: {method: "ajaxValidateVerifyCode", verifyCode: value},
-			url: "/UserServlet",
-			success: function(flag) {
-				if(!flag) {
+			url:"http://localhost:8080/user/ajaxValidateVerifyCode",
+			success: function(result) {
+				if(result.success!='true') {
 					$("#verifyCodeError").css("display", "");
 					$("#verifyCodeError").text("错误的验证码！");
 					bool = false;					

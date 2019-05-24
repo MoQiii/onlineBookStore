@@ -58,7 +58,7 @@
 <c:forEach items="${cartItemList }" var="cartItem">
 	<tr align="center">
 		<td align="right">
-			<a class="linkImage" href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><img border="0" width="54" align="top" src="<c:url value='/${cartItem.book.image_b }'/>"/></a>
+			<a class="linkImage" href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><img border="0" width="54" align="top" src="<c:url value='${cartItem.book.image_b }'/>"/></a>
 		</td>
 		<td align="left">
 			<a href="<c:url value='/JSP/jsps/book/desc.jsp'/>"><span>${cartItem.book.bname }</span></a>

@@ -1,6 +1,6 @@
 package com.syj.olb.cart.web;
 
-import com.alibaba.fastjson.JSON;
+
 import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.service.BookService;
 import com.syj.olb.cart.domain.CartItem;
@@ -12,13 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -76,17 +74,18 @@ public class CartItemController {
         cartItem.setQuantity(quantity);
      //   BigDecimal bid=new BigDecimal();
         BigDecimal currPrice = BigDecimal.valueOf(Double.valueOf(req.getParameter("price")));
-        cartItem.setSubTotal(currPrice);
+        cartItem.setSubTotal(currPrice.multiply(BigDecimal.valueOf(quantity)));
+        cartItem.setSubTotalStr(cartItem.getSubTotal().toString());
         cartItemService.updateQuantity(cartItem);
      //   CartItem cartItem = cartItemService.findById(cartItemId);
         // 给客户端返回一个json对象
-        StringBuilder sb = new StringBuilder("{");
+        /*StringBuilder sb = new StringBuilder("{");
         sb.append("quantity").append(":").append(cartItem.getQuantity());
         sb.append(",");
-        sb.append("subtotal").append(":").append(cartItem.getSubTotal());
+        sb.append("subtotal").append(":").append(cartItem.getSubTotal().toString());
         sb.append("}");
-        resp.setHeader("Content-Type","application/json;charset=UTF-8");
-        ResponseEntity<CartItem> cartItemResponseEntity = new ResponseEntity<CartItem>(cartItem,HttpStatus.OK);
+        resp.setHeader("Content-Type","application/json;charset=UTF-8");*/
+        ResponseEntity<CartItem> cartItemResponseEntity = new ResponseEntity<>(cartItem,HttpStatus.OK);
         return cartItemResponseEntity;
     }
     /**
@@ -94,12 +93,9 @@ public class CartItemController {
      * @param req
      * @param resp
      * @return
-     * @throws ServletException
-     * @throws IOException
      */
     @RequestMapping("/batchDelete")
-    public String batchDelete(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String batchDelete(HttpServletRequest req, HttpServletResponse resp){
         /*
          * 1. 获取cartItemIds参数
          * 2. 调用service方法完成工作
@@ -123,30 +119,21 @@ public class CartItemController {
      * @param req
      * @param resp
      * @return
-     * @throws ServletException
-     * @throws IOException
      */
     @RequestMapping("/add")
-    public String add(HttpServletRequest req, HttpServletResponse resp,CartItem cartItem)
-            throws ServletException, IOException {
-        /*
-         * 1. 封装表单数据到CartItem(bid, quantity)
-         */
-   //     Map map = req.getParameterMap();
-//        CartItem cartItem = CommonUtils.toBean(map, CartItem.class);
-      /*  Book book =new Book();
-        book.setBid(req.getParameter("bid"));*/
+    public String addolbcart(HttpServletRequest req, HttpServletResponse resp,CartItem cartItem){
         User user = (User)req.getSession().getAttribute("sessionUser");
         if(!Objects.nonNull(user)){
+            //未登录跳转到登录界面
             return "jsps/user/login";
         }
+        //存书商品信、用户信息到购物车对象
         String bid = req.getParameter("bid");
         Book book = bookService.load(bid);
         BigDecimal subTotal= new BigDecimal(book.getCurrPrice()*cartItem.getQuantity());
         cartItem.setSubTotal(subTotal);
         cartItem.setBid(bid);
-  //      cartItem.setBook(book);
-   //     cartItem.setUser(user);
+        cartItem.setQuantity(cartItem.getQuantity());
         cartItem.setUid(user.getUid());
         cartItem.setPrice(BigDecimal.valueOf(book.getCurrPrice()));
         /*
@@ -163,12 +150,9 @@ public class CartItemController {
      * @param req
      * @param resp
      * @return
-     * @throws ServletException
-     * @throws IOException
      */
     @RequestMapping("/myCart")
-    public String myCart(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String myCart(HttpServletRequest req, HttpServletResponse resp) {
         /*
          * 1. 得到uid
          */
@@ -198,8 +182,7 @@ public class CartItemController {
         req.setAttribute("cartItemList", cartItemLIst);
         return "jsps/cart/list";
     }
-    public String myCart1(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public String myCart1(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User)req.getSession().getAttribute("sessionUser");
         String uid = user.getUid();
         int a=0;
@@ -218,7 +201,6 @@ public class CartItemController {
                 cartItemLIst.get(i).setBook(books.get(i));
             }
         }
-
         req.setAttribute("cartItemList", cartItemLIst);
         return "jsps/cart/list";
     }

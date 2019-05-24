@@ -2,6 +2,7 @@ package com.syj.olb.oldbook.web;
 
 import com.syj.olb.attachments.pojo.Attachments;
 import com.syj.olb.attachments.service.AttachmentsService;
+import com.syj.olb.book.pojo.Book;
 import com.syj.olb.book.pojo.PageBean;
 import com.syj.olb.category.pojo.Category;
 import com.syj.olb.category.service.CategoryService;
@@ -72,8 +73,8 @@ public class OldBookController {
         if(Objects.nonNull(sessionUser)){
             user= (User)sessionUser;
         }
-        List<OldBook> oldBooks = bookService.oldBookList(user.getUid());
-        PageBean<OldBook> oldBookPageBean = new PageBean<>();
+        List<Book> oldBooks = bookService.oldBookList(user.getUid());
+        PageBean<Book> oldBookPageBean = new PageBean<>();
         oldBookPageBean.setPc(1);
         oldBookPageBean.setTr(oldBooks.size());
         oldBookPageBean.setPs(100);
@@ -85,10 +86,9 @@ public class OldBookController {
     @RequestMapping("/add")
     public String addOldBook(HttpServletRequest req, HttpServletResponse res,OldBook oldBook,@RequestParam("file") MultipartFile file) throws InvocationTargetException, IllegalAccessException, IOException {
         //获取主键
-  //      OldBook oldBook=new OldBook();
         UUID uuid = UUID.randomUUID();
-
         User user=new User();
+        //判断用户是否登录
         Object object = req.getSession().getAttribute("sessionUser");
         if(object==null){
             return "redirect:/user/loginToView";
@@ -96,24 +96,20 @@ public class OldBookController {
         else{
             user=(User)object;
         }
-
+        //把上传的书籍信息封装进对象oldBook
         BeanUtils.populate(oldBook,req.getParameterMap());
         String childCategory = req.getParameter("childCategory");
-
         Category categoryByCname = categoryService.findCategoryByCname(childCategory);
         oldBook.setCategory(categoryByCname);
-
         Attachments attachments = new Attachments();
         attachments.setBusiId(uuid.toString().substring(0,10));
         attachments.setBusiType("oldBookPic");
-        //读取文件内容
+        //读取文件内容，并保存到图片服务器
         attachmentsService.insertAttachments(attachments,file,user);
-
         oldBook.setImage_b(attachments.getFileUrl());
         oldBook.setImage_w(attachments.getFileUrl());
         //  FileInputStream fis=new FileInputStream(file.getInputStream());
         oldBook.setBid(uuid.toString().substring(0,10));
-
         oldBook.setUid(user.getUid());
         bookService.add(oldBook);
         return "redirect:/OldBook/welcome?message=上架成功";
@@ -164,7 +160,7 @@ public class OldBookController {
     @RequestMapping("/load")
     public String load(HttpServletRequest req, HttpServletResponse resp){
         String bid = req.getParameter("bid");//获取链接的参数bid
-        OldBook book = bookService.load(bid);//通过bid得到book对象
+        Book book = bookService.load(bid);//通过bid得到book对象
         req.setAttribute("book", book);//保存到req中
         return "jsps/oldBookExchange/desc";//转发到desc.jsp
     }
@@ -195,10 +191,11 @@ public class OldBookController {
         OldBookQuery bookQuery = new OldBookQuery();
         bookQuery.setCid(cid);
         bookQuery.setPc(pc);
+        bookQuery.setStatus("-1");
         /*
          * 4. 使用pc和cid调用service#findByCategory得到PageBean
          */
-        PageBean<OldBook> pb = bookService.findByCategory(bookQuery);
+        PageBean<Book> pb = bookService.findByCategory(bookQuery);
         /*
          * 5. 给PageBean设置url，保存PageBean，转发到/jsps/book/list.jsp
          */

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface OldBookDao {
-    public List<OldBook> oldBookList( String uid);
+    public List<Book> oldBookList( String uid);
     /**
      * 删除图书
      * @param bid
@@ -32,7 +32,7 @@ public interface OldBookDao {
      * @param bid
      * @return
      */
-    public OldBook load(String bid);
+    public Book load(String bid);
     /**
      * 加载图书
      * @param bids
@@ -44,7 +44,7 @@ public interface OldBookDao {
      * @param bookQuery
      * @return
      */
-    public PageBean<OldBook> findByCategory(OldBookQuery bookQuery);
+    public PageBean<Book> findByCategory(OldBookQuery bookQuery);
 
     /**
      * 按书名查
@@ -84,5 +84,5 @@ public interface OldBookDao {
      * @param bid
      * @return
      */
-    public OldBook findByBid(String bid);
+    public Book findByBid(String bid);
 }

@@ -24,6 +24,19 @@ $(function() {
 		$("#" + $(this).attr("name")).attr("checked", true);
 	});
 });
+function paySuccess() {
+	alert("支付成功");
+	$.ajax({
+		url:'http://localhost:8080/order/payment',
+		type:'POST',
+		data:{oid:$('#oid').val()},
+		success:function () {
+            window.location.href='http://localhost:8080/order/myOrders';
+        }
+	});
+
+
+}
 </script>
   </head>
   
@@ -34,7 +47,7 @@ $(function() {
 </div>
 <form action="<c:url value='/order/payment'/>" method="post" id="pay" target="_top">
 <%--<input type="hidden" name="method" value="payment"/>--%>
-<input type="hidden" name="oid" value="${order.oid }"/>
+<input type="hidden" id="oid" name="oid" value="${order.oid }"/>
 <div class="divBank">
 	<div class="divText">选择网上银行</div>
 	<div style="margin-left: 20px;">
@@ -117,8 +130,11 @@ $(function() {
 		<img name="CZ-NET-B2C" align="middle" src="<c:url value='/bank_img/zheshang.bmp'/>"/>
 	  </div>
 	</div>
+	<%--<div style="margin: 40px;">--%>
+		<%--<a href="javascript:void $('#pay').submit();" class="linkNext">下一步</a>--%>
+	<%--</div>paySuccess--%>
 	<div style="margin: 40px;">
-		<a href="javascript:void $('#pay').submit();" class="linkNext">下一步</a>
+		<a  onclick="paySuccess()" class="linkNext">下一步</a>
 	</div>
 </div>
 </form>

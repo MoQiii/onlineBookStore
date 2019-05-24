@@ -59,7 +59,7 @@
 
 
   <c:forEach items="${order.orderItemList }" var="orderItem">
-	    <img border="0" width="70" src="<c:url value='/${orderItem.book.image_b }'/>"/>
+	    <img border="0" width="70" src="<c:url value='${orderItem.book.image_b }'/>"/>
   </c:forEach>
 
 			</td>
@@ -91,7 +91,7 @@
 
 	</table>
 	<br/>
-	<%@include file="/JSP/jsps/pager/pager.jsp" %>
+	<%--<%@include file="/JSP/jsps/pager/pager.jsp" %>--%>
 </div>
 	  </div>
   </body>

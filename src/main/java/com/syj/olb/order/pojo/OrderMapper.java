@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface OrderMapper {
-    @Select("select * from t_order where uid=#{uid}")
+    @Select("select * from t_order where uid=#{uid} order by ordertime desc")
     public List<Order> findByUser(@Param("uid")String uid, int pc);
     @Select("select count(*) from t_order where uid=#{uid}")
     public int countByUser(@Param("uid")String uid);

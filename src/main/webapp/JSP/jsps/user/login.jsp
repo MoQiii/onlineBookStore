@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value='/JSP/jsps/css/user/login.css'/>">
 	<script type="text/javascript" src="<c:url value='/jQuery/jquery-3.1.1.min.js'/>"></script>
 	<script src="<c:url value='/js/common.js'/>"></script>
-
+    <script src="<c:url value='/JSP/jsps/js/user/login.js'/>"></script>
 <script type="text/javascript">
 	$(function() {/*Map<String(Cookie名称),Cookie(Cookie本身)>*/
 		// 获取cookie中的用户名
@@ -30,12 +30,32 @@
 		}
 		$("#loginname").val(loginname);
 	});
+	/*function validata(){
+        $.ajax({
+            url:"http://localhost:8080/user/ajaxValidateVerifyCode",
+            type:"POST",
+            dataType:"json",
+            data:{verifyCode:$("#iverifyCode").val()},
+            success:function (result) {
+                if(result.success=='true'){
+                    $("#loginForm").submit();
+                }
+                else{
+                    alert("验证码输入错误，请重新输入");
+                }
+            },
+            error:function () {
+                alert("error");
+            }
+        });
+    }*/
+
 </script>
   </head>
   
   <body>
 	<div class="main">
-	  <div><img src="<c:url value='/images/logo.gif'/>" /></div>
+	  <%--<div><img src="<c:url value='/images/nyist.jpg'/>" style="width: 200px;height: 150px;"/></div>--%>
 	  <div>
 	    <div class="imageDiv"><img class="img" src="<c:url value='/images/zj.png'/>"/></div>
         <div class="login1">
@@ -47,8 +67,7 @@
               </span>
             </div>
             <div>
-              <form target="_top" action="<c:url value='/user/login'/>" method="post" id="loginForm">
-                <input type="hidden" name="method" value="login" />
+              <form target="_top" action="<c:url value='/user/login'/>" method="post" id="loginForm1">
                   <table>
                     <tr>
                       <td width="50"></td>
@@ -75,7 +94,7 @@
                       <td>
                         <input class="input yzm" type="text" name="verifyCode" id="verifyCode" value="${user.verifyCode }"/>
                         <img id="vCode" src="<c:url value='/verifyCode/verifyCode'/>"/>
-                        <a id="verifyCode" href="javascript:picChange()">换张图</a>
+                        <a id="averifyCode" href="javascript:picChange()">换张图</a>
                       </td>
                     </tr>
                     <tr>
@@ -85,7 +104,8 @@
                     <tr>
                       <td>&nbsp;</td>
                       <td align="left">
-                        <input type="image" id="submit" src="<c:url value='/images/login1.jpg'/>" class="loginBtn"/>
+                         <%-- <img src="<c:url value='/images/login1.jpg'/>" alt="登录" onclick="validata()">--%>
+                         <input type="button" id="submit1"onclick="validata()" style="background-image: url('/images/login1.jpg');cursor:pointer"  class="loginBtn"/>
                       </td>
                     </tr>																				
                  </table>
